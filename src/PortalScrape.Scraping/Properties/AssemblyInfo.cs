@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PortalScrape")]
+[assembly: AssemblyTitle("PortalScrape.Scraping")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hewlett-Packard Company")]
-[assembly: AssemblyProduct("PortalScrape")]
+[assembly: AssemblyProduct("PortalScrape.Scraping")]
 [assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d2900e48-9850-4bae-81c5-5700b2671b4d")]
+[assembly: Guid("b163b13e-6a1b-41f4-aca9-a3534183bc46")]
 
 // Version information for an assembly consists of the following four values:
 //
