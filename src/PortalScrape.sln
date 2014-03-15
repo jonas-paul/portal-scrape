@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Scraping", "Po
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Tests.Integration", "PortalScrape.Tests.Integration\PortalScrape.Tests.Integration.csproj", "{70B4C356-A490-4D28-BC8D-9FBACD07FF9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.DataAccess", "PortalScrape.DataAccess\PortalScrape.DataAccess.csproj", "{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{70B4C356-A490-4D28-BC8D-9FBACD07FF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70B4C356-A490-4D28-BC8D-9FBACD07FF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70B4C356-A490-4D28-BC8D-9FBACD07FF9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
