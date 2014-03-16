@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 
 namespace PortalScrape.Scraping.Delfi
 {
@@ -65,10 +66,7 @@ namespace PortalScrape.Scraping.Delfi
 
             if (script == null) return null;
 
-            var scriptText = script.InnerText.GetSubstringBetween("__aokwd=[", );
-            var startIndex = scriptText.IndexOf("__aokwd=[", StringComparison.InvariantCultureIgnoreCase) + 9;
-            var endIndex = scriptText.IndexOf("].", startIndex, StringComparison.InvariantCultureIgnoreCase);
-            var keywordString = scriptText.Substring(startIndex, endIndex - startIndex);
+            var keywordString = script.InnerText.GetSubstringBetween("__aokwd=[", "].");
 
             return keywordString;
         }
