@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Delfi\Delfi.cs" />
+    <Compile Include="Delfi\DelfiArticleInfo.cs" />
+    <Compile Include="Delfi\DelfiSection.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
