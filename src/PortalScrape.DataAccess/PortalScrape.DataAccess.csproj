@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Article.cs" />
+    <Compile Include="Entities\Portal.cs" />
     <Compile Include="Mappings\ArticleMap.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
