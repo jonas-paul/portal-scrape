@@ -48,10 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\ArticleInfo.cs" />
     <Compile Include="Entities\Portal.cs" />
     <Compile Include="Mappings\ArticleInfoMap.cs" />
+    <Compile Include="Mappings\CommentMap.cs" />
     <Compile Include="Mappings\ArticleMap.cs" />
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
