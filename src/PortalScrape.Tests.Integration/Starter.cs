@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using PortalScrape.DataAccess.Entities;
 using PortalScrape.Scraping.Delfi;
 
 namespace PortalScrape.Tests.Integration
@@ -17,7 +18,7 @@ namespace PortalScrape.Tests.Integration
         {
             var delfi = new Delfi();
 
-            var articles = new List<DelfiArticleInfo>();
+            var articles = new List<ArticleInfo>();
 
             var sw = new Stopwatch();
             sw.Start();
@@ -30,7 +31,7 @@ namespace PortalScrape.Tests.Integration
 
                     try
                     {
-                        articles.AddRange(section.GetArticles(i));
+                        articles.AddRange(new DelfiArticleInfoScraper().ScrapePage(section, i));
                     }
                     catch (Exception e)
                     {
@@ -49,7 +50,7 @@ namespace PortalScrape.Tests.Integration
             {
                 try
                 {
-                    aa.Add(delfiArticleInfo.GetArticle());
+                    //aa.Add(delfiArticleInfo.GetArticle());
                 }
                 catch (Exception e)
                 {
@@ -63,11 +64,13 @@ namespace PortalScrape.Tests.Integration
         [Test]
         public void ScrapeArticle()
         {
-            var articleInfo =
-                JsonConvert.DeserializeObject<DelfiArticleInfo>(
-                    @"{""Id"":64225526,""Url"":""http://www.delfi.lt/news/daily/world/j-tymosenko-perspejo-prasides-partizaninis-karas.d?id=64225526"",""Title"":""J. Tymošenko perspėjo: prasidės partizaninis karas"",""DateString"":"" 2014 kovo mėn.  8 d. 09:57""}");
+            var articleInfo = new ArticleInfo
+            {
+                Url =
+                    "http://www.delfi.lt/news/daily/lithuania/a-butkevicius-apie-nauja-lietuvos-kariuomenes-ginkluote-tai-yra-slapta.d?id=64317130"
+            };
 
-            var article = articleInfo.GetArticle();
+            var article = new DelfiArticleScraper().Scrape(articleInfo);
         }
 
         [Test]

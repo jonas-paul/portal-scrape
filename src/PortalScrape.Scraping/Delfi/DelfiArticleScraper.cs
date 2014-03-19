@@ -1,37 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
-using Newtonsoft.Json;
+using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Delfi
 {
-    public class DelfiArticleInfo
+    public class DelfiArticleScraper
     {
-        public int Id { get; set; }
-        public string Url { get; set; }
-        public string Title { get; set; }
-        public string DateString { get; set; }
-
-        public DelfiArticle GetArticle()
+        public Article Scrape(ArticleInfo articleInfo)
         {
-            var docNode = Utilities.DownloadPage(Url);
+            var docNode = Utilities.DownloadPage(articleInfo.Url);
 
-            var article = new DelfiArticle
-                {
-                    Id = Id,
-                    Url = Url,
-                    Title = Title,
-                    DateModified = GetDateModified(docNode),
-                    DatePublished = GetDatePublished(docNode),
-                    Tags = GetTags(docNode),
-                    Keywords = GetKeywords(docNode),
-                    Body = GetBody(docNode),
-                    AuthorName = GetAuthorName(docNode),
-                    RelatedArticles = GetRelatedArticlesIds(docNode),
-                };
-
-            return article;
+            return new Article
+            {
+                Portal = articleInfo.Portal,
+                RefNo = articleInfo.RefNo,
+                CommentCount = articleInfo.CommentCount,
+                Title = articleInfo.Title,
+                Url = articleInfo.Url,
+                DateScraped = DateTime.UtcNow.AddHours(2),
+                AuthorName = GetAuthorName(docNode),
+                Body = GetBody(docNode),
+                DateModified = GetDateModified(docNode),
+                DatePublished = GetDatePublished(docNode),
+                Tags = GetTags(docNode),
+                Keywords = GetKeywords(docNode),
+                RelatedArticles = String.Join(", ", GetRelatedArticlesIds(docNode)),
+            };
         }
 
         private static List<int> GetRelatedArticlesIds(HtmlNode docNode)
@@ -81,23 +78,25 @@ namespace PortalScrape.Scraping.Delfi
             return tagString;
         }
 
-        private string GetDatePublished(HtmlNode docNode)
+        private DateTime GetDatePublished(HtmlNode docNode)
         {
             // meta itemprop="datePublished" content="
+            //2014-03-19T19:11:35+0200
             var node = docNode.SelectSingleNode("//meta[@itemprop='datePublished']");
-            return node.Attributes["content"].Value;
+            return ParseDateTime(node.Attributes["content"].Value);
         }
 
-        private string GetDateModified(HtmlNode docNode)
+        private DateTime GetDateModified(HtmlNode docNode)
         {
             // meta itemprop="dateModified" content="
             var node = docNode.SelectSingleNode("//meta[@itemprop='dateModified']");
-            return node.Attributes["content"].Value;
+            return ParseDateTime(node.Attributes["content"].Value);
         }
 
-        public override string ToString()
+        private static DateTime ParseDateTime(string dateTimeString)
         {
-            return JsonConvert.SerializeObject(this);
+            var s = dateTimeString.Substring(0, dateTimeString.Length - 5);
+            return DateTime.ParseExact(s, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
         }
     }
 }
