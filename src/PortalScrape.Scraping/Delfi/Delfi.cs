@@ -7,7 +7,7 @@ namespace PortalScrape.Scraping.Delfi
         public const string MainHost = "http://www.delfi.lt";
         public const string RussianHost = "http://ru.delfi.lt";
 
-        public readonly List<DelfiSection> Sections = new List<DelfiSection>
+        public static readonly List<DelfiSection> Sections = new List<DelfiSection>
             {
                 new DelfiSection(MainHost, "news/daily/lithuania/", "LT::Delfi::Lietuvoje"),
                 new DelfiSection(MainHost, "news/daily/world/", "LT::Delfi::Užsienyje"),

@@ -22,7 +22,7 @@ namespace PortalScrape.Tests.Integration
             var sw = new Stopwatch();
             sw.Start();
 
-            foreach (var section in delfi.Sections.Skip(1).Take(1))
+            foreach (var section in Delfi.Sections.Skip(1).Take(1))
             {
                 for (var i = 1; i <= 1; i++)
                 {
@@ -68,6 +68,13 @@ namespace PortalScrape.Tests.Integration
                     @"{""Id"":64225526,""Url"":""http://www.delfi.lt/news/daily/world/j-tymosenko-perspejo-prasides-partizaninis-karas.d?id=64225526"",""Title"":""J. Tymošenko perspėjo: prasidės partizaninis karas"",""DateString"":"" 2014 kovo mėn.  8 d. 09:57""}");
 
             var article = articleInfo.GetArticle();
+        }
+
+        [Test]
+        public void ScrapeArticleInfos()
+        {
+            var scraper = new DelfiArticleInfoScraper();
+            var articleInfos = scraper.ScrapeForPeriod(Delfi.Sections.First(), TimeSpan.FromHours(8));
         }
     }
 }

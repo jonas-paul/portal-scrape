@@ -6,8 +6,8 @@ namespace PortalScrape.Launcher
     {
         static void Main(string[] args)
         {
-            var starter = new CommentsGetterTests();
-            starter.First();
+            var starter = new Starter();
+            starter.ScrapeArticleInfos();
         }
     }
 }

@@ -47,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelfiWordyDateParser.cs" />
     <Compile Include="Delfi\Delfi.cs" />
     <Compile Include="Delfi\DelfiArticle.cs" />
     <Compile Include="Delfi\DelfiArticleInfo.cs" />
+    <Compile Include="Delfi\DelfiArticleInfoScraper.cs" />
     <Compile Include="Delfi\DelfiComment.cs" />
     <Compile Include="Delfi\DelfiCommentsGetter.cs" />
     <Compile Include="Delfi\DelfiSection.cs" />
@@ -59,6 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PortalScrape.DataAccess\PortalScrape.DataAccess.csproj">
+      <Project>{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}</Project>
+      <Name>PortalScrape.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
