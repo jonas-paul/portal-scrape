@@ -7,7 +7,7 @@ namespace PortalScrape.Launcher
         static void Main(string[] args)
         {
             var starter = new Starter();
-            starter.ScrapeArticle();
+            starter.ScrapeComments();
         }
     }
 }

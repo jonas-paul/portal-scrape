@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DelfiWordyDateParser.cs" />
     <Compile Include="Delfi\Delfi.cs" />
+    <Compile Include="Delfi\DelfiCommentsScraper.cs" />
     <Compile Include="Delfi\DelfiArticleInfoScraper.cs" />
     <Compile Include="Delfi\DelfiArticleScraper.cs" />
     <Compile Include="Delfi\DelfiSection.cs" />

@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommentsGetterTests.cs" />
     <Compile Include="Starter.cs" />
     <Compile Include="DataAccess\CreateDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
