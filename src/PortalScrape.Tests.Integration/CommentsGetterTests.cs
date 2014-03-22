@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using PortalScrape.DataAccess.Entities;
 using PortalScrape.Scraping;
 using PortalScrape.Scraping.Delfi;
 
@@ -23,7 +24,7 @@ namespace PortalScrape.Tests.Integration
 
             foreach (var commentNode in commentNodes)
             {
-                var comment = new DelfiComment();
+                var comment = new Comment();
 
                 var anchorNode = commentNode.SelectSingleNode("a[@class='comment-list-comment-anchor']");
 

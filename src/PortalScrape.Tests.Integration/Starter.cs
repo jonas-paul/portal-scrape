@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using PortalScrape.DataAccess.Entities;
 using PortalScrape.Scraping.Delfi;
@@ -44,7 +43,7 @@ namespace PortalScrape.Tests.Integration
 
             File.WriteAllLines(@"D:\delfiarticleinfos.txt", articles.Select(a => a.ToString()));
 
-            var aa = new List<DelfiArticle>();
+            var aa = new List<Article>();
 
             foreach (var delfiArticleInfo in articles)
             {
