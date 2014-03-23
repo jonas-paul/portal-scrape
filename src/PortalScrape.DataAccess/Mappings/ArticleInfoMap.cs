@@ -18,6 +18,9 @@ namespace PortalScrape.DataAccess.Mappings
             Map(x => x.CommentCount).Not.Nullable();
             Map(x => x.DatePublished).Not.Nullable();
             Map(x => x.Title).Not.Nullable();
+
+            Map(x => x.CommentCountInDb).Formula("(SELECT COUNT(*) FROM Comments WHERE Comments.ArticleRefNo = RefNo)");
+            Map(x => x.HasArticleInDb).Formula("(SELECT 1 FROM Articles WHERE Articles.RefNo = RefNo)");
         }
     }
 }

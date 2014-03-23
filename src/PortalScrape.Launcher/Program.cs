@@ -10,8 +10,11 @@ namespace PortalScrape.Launcher
             //var starter = new Starter();
             //starter.ScrapeComments();
 
-            var dbTests = new CreateDb();
-            dbTests.ExportSchema();
+            //var dbTests = new CreateDb();
+            //dbTests.ExportSchema();
+
+            var processingTests = new ProcessingTests();
+            processingTests.GetInfosAndPersist();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Launcher", "PortalScrape.Launcher\PortalScrape.Launcher.csproj", "{ADEA74B3-2F94-4851-B8B9-7C9AADE3ECA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Scraping", "PortalScrape.Scraping\PortalScrape.Scraping.csproj", "{C98A0A0C-D0D6-4FDD-9EAC-0A4380649A77}"
@@ -8,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Tests.Integration", "PortalScrape.Tests.Integration\PortalScrape.Tests.Integration.csproj", "{70B4C356-A490-4D28-BC8D-9FBACD07FF9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.DataAccess", "PortalScrape.DataAccess\PortalScrape.DataAccess.csproj", "{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Processing", "PortalScrape.Processing\PortalScrape.Processing.csproj", "{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,10 @@ Global
 		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{153F89B3-9D34-4F02-8BA2-DD68F9FF300B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

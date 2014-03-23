@@ -37,7 +37,21 @@ namespace PortalScrape.Scraping.Delfi
             var docNode = Utilities.DownloadPage(url);
             var articleDivs = docNode.SelectNodes("//div[@class='category-headline-item']");
 
-            return articleDivs.Select(ParseArticleInfoDiv).ToList();
+            var result = new List<ArticleInfo>();
+
+            foreach (var articleDiv in articleDivs)
+            {
+                try
+                {
+                    result.Add(ParseArticleInfoDiv(articleDiv));
+                }
+                catch (Exception e)
+                {
+                    // TODO: log exception
+                }
+            }
+
+            return result;
         }
 
         private static ArticleInfo ParseArticleInfoDiv(HtmlNode articleDiv)
@@ -54,7 +68,10 @@ namespace PortalScrape.Scraping.Delfi
             articleInfo.DatePublished = DelfiWordyDateParser.Parse(dateDiv.InnerText);
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);
             articleInfo.Portal = Portal.Delfi;
-            articleInfo.CommentCount = Convert.ToInt32(commentCountNode.InnerText.TrimStart('(').TrimEnd(')'));
+            articleInfo.CommentCount = commentCountNode == null ? 0 : Convert.ToInt32(commentCountNode.InnerText.TrimStart('(').TrimEnd(')'));
+
+            var articleId = Convert.ToInt32(articleInfo.Url.GetQueryParameterValueFromUrl("id"));
+            if (articleId == 0) throw new Exception("Article id not found");
 
             return articleInfo;
         }
