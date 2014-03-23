@@ -11,7 +11,7 @@ namespace PortalScrape.Launcher
             //starter.ScrapeComments();
 
             var dbTests = new CreateDb();
-            dbTests.First();
+            dbTests.ExportSchema();
         }
     }
 }

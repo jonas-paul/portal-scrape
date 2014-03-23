@@ -21,8 +21,8 @@ namespace PortalScrape.DataAccess.Mappings
             Map(x => x.UserName).Not.Nullable();
             Map(x => x.CommentText).Not.Nullable();
             Map(x => x.InResponseToCommentId);
-            Map(x => x.Upvotes).Not.Nullable();
-            Map(x => x.DownVotes).Not.Nullable();
+            Map(x => x.Upvotes);
+            Map(x => x.DownVotes);
         }
     }
 }

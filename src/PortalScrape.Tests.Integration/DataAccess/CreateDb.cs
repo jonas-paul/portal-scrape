@@ -9,7 +9,8 @@ namespace PortalScrape.Tests.Integration.DataAccess
     public class CreateDb
     {
         [Test]
-        public void First()
+        [Explicit]
+        public void ExportSchema()
         {
             NHibernateHelper.ExportSchema();
         }
@@ -18,12 +19,33 @@ namespace PortalScrape.Tests.Integration.DataAccess
         public void SaveComment()
         {
             var fixture = new Fixture();
+            var comment = fixture.Create<Comment>();
+            SaveEntity(comment);
+        }
+
+        [Test]
+        public void SaveArticle()
+        {
+            var fixture = new Fixture();
+            var comment = fixture.Create<Article>();
+            SaveEntity(comment);
+        }
+
+        [Test]
+        public void SaveArticleInfo()
+        {
+            var fixture = new Fixture();
+            var comment = fixture.Create<ArticleInfo>();
+            SaveEntity(comment);
+        }
+
+        private void SaveEntity(object entity)
+        {
             using (var session = NHibernateHelper.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var comment = fixture.Create<Comment>();
-                    session.Save(comment);
+                    session.Save(entity);
                     transaction.Commit();
                 }
             }
