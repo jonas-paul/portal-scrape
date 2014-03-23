@@ -7,22 +7,22 @@ namespace PortalScrape.DataAccess.Mappings
     {
         public CommentMap()
         {
-            Id(x => x.Id);
-            Map(x => x.Portal);
-            Map(x => x.RefNo);
-            Map(x => x.DateScraped);
-
-            Map(x => x.ArticleRefNo);
-            Map(x => x.IpAddress);
-            Map(x => x.DateCreated);
-
-            Map(x => x.UserName);
-            Map(x => x.CommentText);
-            Map(x => x.InResponseToCommentId);
-            Map(x => x.Upvotes);
-            Map(x => x.DownVotes);
-            
             Table("Comments");
+
+            CompositeId()
+                .KeyProperty(x => x.Portal)
+                .KeyProperty(x => x.RefNo);
+            Map(x => x.DateScraped).Not.Nullable();
+
+            Map(x => x.ArticleRefNo).Not.Nullable();
+            Map(x => x.IpAddress).Not.Nullable();
+            Map(x => x.DateCreated).Not.Nullable();
+
+            Map(x => x.UserName).Not.Nullable();
+            Map(x => x.CommentText).Not.Nullable();
+            Map(x => x.InResponseToCommentId);
+            Map(x => x.Upvotes).Not.Nullable();
+            Map(x => x.DownVotes).Not.Nullable();
         }
     }
 }

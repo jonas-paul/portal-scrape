@@ -13,5 +13,21 @@ namespace PortalScrape.DataAccess.Entities
         public virtual string Title { get; set; }
         public virtual int CommentCount { get; set; }
         public virtual DateTime DatePublished { get; set; }
+        
+        public override bool Equals(object obj)
+        {
+            var comment = obj as ArticleInfo;
+            if (comment == null) return false;
+
+            return comment.Portal == Portal && comment.RefNo == RefNo;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return RefNo.GetHashCode() * 23 + Portal.GetHashCode();
+            }
+        }
     }
 }

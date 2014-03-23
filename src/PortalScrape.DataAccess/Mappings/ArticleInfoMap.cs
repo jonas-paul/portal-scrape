@@ -7,17 +7,17 @@ namespace PortalScrape.DataAccess.Mappings
     {
         public ArticleInfoMap()
         {
-            Id(x => x.Id);
-            Map(x => x.Portal);
-            Map(x => x.RefNo);
-            Map(x => x.DateScraped);
-
-            Map(x => x.Url);
-            Map(x => x.CommentCount);
-            Map(x => x.DatePublished);
-            Map(x => x.Title);
-            
             Table("ArticleInfos");
+
+            CompositeId()
+                .KeyProperty(x => x.Portal)
+                .KeyProperty(x => x.RefNo);
+            Map(x => x.DateScraped).Not.Nullable();
+
+            Map(x => x.Url).Not.Nullable();
+            Map(x => x.CommentCount).Not.Nullable();
+            Map(x => x.DatePublished).Not.Nullable();
+            Map(x => x.Title).Not.Nullable();
         }
     }
 }

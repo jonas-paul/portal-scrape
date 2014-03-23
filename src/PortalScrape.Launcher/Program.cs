@@ -1,4 +1,5 @@
 ﻿using PortalScrape.Tests.Integration;
+using PortalScrape.Tests.Integration.DataAccess;
 
 namespace PortalScrape.Launcher
 {
@@ -6,8 +7,11 @@ namespace PortalScrape.Launcher
     {
         static void Main(string[] args)
         {
-            var starter = new Starter();
-            starter.ScrapeComments();
+            //var starter = new Starter();
+            //starter.ScrapeComments();
+
+            var dbTests = new CreateDb();
+            dbTests.First();
         }
     }
 }

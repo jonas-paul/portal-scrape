@@ -18,5 +18,21 @@ namespace PortalScrape.DataAccess.Entities
         public virtual int InResponseToCommentId { get; set; }
         public virtual int Upvotes { get; set; }
         public virtual int DownVotes { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var comment = obj as Comment;
+            if (comment == null) return false;
+
+            return comment.Portal == Portal && comment.RefNo == RefNo;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return RefNo.GetHashCode() * 23 + Portal.GetHashCode();
+            }
+        }
     }
 }
