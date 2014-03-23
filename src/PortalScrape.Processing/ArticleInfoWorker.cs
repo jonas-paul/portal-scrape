@@ -47,7 +47,11 @@ namespace PortalScrape.Processing
 
                         if (currentInfo != null)
                         {
-                            if (scrapedInfo.CommentCount - currentInfo.CommentCount >= _commentDifferenceToTriggerUpdate)
+                            if (!currentInfo.HasArticleInDb)
+                            {
+                                _articlesToScrapeQueue.Add(scrapedInfo);
+                            }
+                            if (scrapedInfo.CommentCount - currentInfo.CommentCountInDb >= _commentDifferenceToTriggerUpdate)
                             {
                                 _commentsToScrapeQueue.Add(scrapedInfo);
                             }
