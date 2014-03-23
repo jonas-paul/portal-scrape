@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NHibernate.Linq;
+using NUnit.Framework;
 using Ploeh.AutoFixture;
 using PortalScrape.DataAccess;
 using PortalScrape.DataAccess.Entities;
@@ -37,6 +39,15 @@ namespace PortalScrape.Tests.Integration.DataAccess
             var fixture = new Fixture();
             var comment = fixture.Create<ArticleInfo>();
             SaveEntity(comment);
+        }
+
+        [Test]
+        public void LoadArticleInfo()
+        {
+            using (var session = NHibernateHelper.OpenSession())
+            {
+                var articleInfo = session.Query<ArticleInfo>().Where(ai => ai.RefNo == 64345502).ToList();
+            }
         }
 
         private void SaveEntity(object entity)

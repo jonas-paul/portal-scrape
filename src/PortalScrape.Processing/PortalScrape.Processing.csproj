@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticleInfoWorker.cs" />
+    <Compile Include="CommentWorker.cs" />
+    <Compile Include="ArticleWorker.cs" />
+    <Compile Include="IWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

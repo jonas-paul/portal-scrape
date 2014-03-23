@@ -63,6 +63,11 @@ namespace PortalScrape.Scraping.Delfi
             var articleInfo = new ArticleInfo();
 
             articleInfo.Url = linkToArticle.Attributes["href"].Value;
+            if (articleInfo.Url.Contains(@"/video/"))
+            {
+                throw new Exception("Delfi TV article");
+            }
+
             articleInfo.RefNo = Convert.ToInt32(articleInfo.Url.GetQueryParameterValueFromUrl("id"));
             articleInfo.Title = linkToArticle.InnerText;
             articleInfo.DatePublished = DelfiWordyDateParser.Parse(dateDiv.InnerText);

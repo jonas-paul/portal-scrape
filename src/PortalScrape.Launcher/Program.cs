@@ -14,7 +14,7 @@ namespace PortalScrape.Launcher
             //dbTests.ExportSchema();
 
             var processingTests = new ProcessingTests();
-            processingTests.GetInfosAndPersist();
+            processingTests.OneFullCycle();
         }
     }
 }

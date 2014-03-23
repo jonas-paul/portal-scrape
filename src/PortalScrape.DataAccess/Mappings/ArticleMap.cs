@@ -20,7 +20,7 @@ namespace PortalScrape.DataAccess.Mappings
             Map(x => x.DateModified);
 
             Map(x => x.Title).Not.Nullable();
-            Map(x => x.AuthorName).Not.Nullable();
+            Map(x => x.AuthorName);
             Map(x => x.Body).Not.Nullable();
 
             Map(x => x.Tags);

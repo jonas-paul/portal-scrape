@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
@@ -36,6 +37,11 @@ namespace PortalScrape.Scraping.Delfi
             var relatedArticlesNodes =
                 docNode.SelectNodes("//div[@id='artres-related-wrapper']/div[contains(@class, 'artres-related-pitem')]");
 
+            if (relatedArticlesNodes == null)
+            {
+                return new List<int>();
+            }
+
             var urlAttributes = relatedArticlesNodes.Select(e => e.Attributes["data-url"]).Where(u => u != null);
             var urls = urlAttributes.Select(e => e.Value);
             var ids = urls.Select(u => Convert.ToInt32(u.GetQueryParameterValueFromUrl("id"))).ToList();
@@ -45,13 +51,21 @@ namespace PortalScrape.Scraping.Delfi
 
         private static string GetAuthorName(HtmlNode docNode)
         {
-            var node = docNode.SelectSingleNode("//div[@class='delfi-author-name']");
+            var node = docNode.SelectSingleNode("//div[@class='delfi-author-name']") ??
+                       docNode.SelectSingleNode("//div[@class='delfi-source-name']");
+
+            if (node == null)
+            {
+                var t = 5;
+            }
+
             return node == null ? null : node.InnerText;
         }
 
         private static string GetBody(HtmlNode docNode)
         {
             var paragraphs = docNode.SelectNodes("//div[@class='delfi-article-body']//p");
+
             var text = String.Join(" ", paragraphs.Elements().Select(e => e.InnerText));
             return text;
         }

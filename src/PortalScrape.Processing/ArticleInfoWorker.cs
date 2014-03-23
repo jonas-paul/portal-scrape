@@ -8,7 +8,7 @@ using PortalScrape.Scraping.Delfi;
 
 namespace PortalScrape.Processing
 {
-    public class ArticleInfoWorker
+    public class ArticleInfoWorker : IWorker
     {
         private readonly BlockingCollection<ArticleInfo> _articlesToScrapeQueue;
         private readonly BlockingCollection<ArticleInfo> _commentsToScrapeQueue;
@@ -26,7 +26,7 @@ namespace PortalScrape.Processing
         public void Work()
         {
             _articlePeriod = TimeSpan.FromDays(3);
-            _commentDifferenceToTriggerUpdate = 20;
+            _commentDifferenceToTriggerUpdate = 5;
             _commentDifferenceToTriggerFetch = 20;
 
             var cutOffTime = DateTime.UtcNow.AddHours(2).Add(-_articlePeriod);
@@ -50,11 +50,16 @@ namespace PortalScrape.Processing
                             if (!currentInfo.HasArticleInDb)
                             {
                                 _articlesToScrapeQueue.Add(scrapedInfo);
+                                Console.WriteLine("Article order added");
                             }
+
+                            scrapedInfo.CommentCountInDb = currentInfo.CommentCountInDb;
                             if (scrapedInfo.CommentCount - currentInfo.CommentCountInDb >= _commentDifferenceToTriggerUpdate)
                             {
                                 _commentsToScrapeQueue.Add(scrapedInfo);
+                                Console.WriteLine("Comments order added");
                             }
+
                             session.Merge(scrapedInfo);
                         }
                         else
@@ -63,7 +68,10 @@ namespace PortalScrape.Processing
                             if (scrapedInfo.CommentCount >= _commentDifferenceToTriggerFetch)
                             {
                                 _commentsToScrapeQueue.Add(scrapedInfo);
+                                Console.WriteLine("Comments order added");
                             }
+
+                            session.Save(scrapedInfo);
                         }
                     }
                 }
