@@ -31,7 +31,7 @@ namespace PortalScrape.Scraping.Delfi
         public List<ArticleInfo> ScrapePage(DelfiSection section, int page)
         {
             var builder = new UriBuilder(section.Host);
-            builder.Path += section.Section;
+            builder.Path += section.RelativeUrl;
             var url = builder.ToString().AddQueryParameterToUrl("page", page);
 
             var docNode = Utilities.DownloadPage(url);

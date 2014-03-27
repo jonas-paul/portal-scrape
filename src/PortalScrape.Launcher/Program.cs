@@ -1,4 +1,5 @@
-﻿using PortalScrape.Tests.Integration;
+﻿using System;
+using PortalScrape.Tests.Integration;
 using PortalScrape.Tests.Integration.DataAccess;
 
 namespace PortalScrape.Launcher
@@ -15,6 +16,8 @@ namespace PortalScrape.Launcher
 
             var processingTests = new ProcessingTests();
             processingTests.OneFullCycle();
+
+            Console.ReadKey();
         }
     }
 }

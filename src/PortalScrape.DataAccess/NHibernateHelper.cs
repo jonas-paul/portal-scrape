@@ -39,7 +39,8 @@ namespace PortalScrape.DataAccess
             builder.IntegratedSecurity = true;
 
             var config = Fluently.Configure().Database(
-                MsSqlConfiguration.MsSql2008.ConnectionString(builder.ToString()).ShowSql()
+                MsSqlConfiguration.MsSql2008.ConnectionString(builder.ToString())
+                //.ShowSql()
                 )
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<NHibernateHelper>()
                     .Conventions.Add<StringColumnLengthConvention >());

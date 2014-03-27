@@ -42,10 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticleInfoWorker.cs" />
-    <Compile Include="CommentWorker.cs" />
-    <Compile Include="ArticleWorker.cs" />
-    <Compile Include="IWorker.cs" />
+    <Compile Include="Process.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
