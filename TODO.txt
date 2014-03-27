@@ -5,3 +5,4 @@ update process to collect metrics
 write metrics to db
 make windows service for continous background work
 review exception handling
+create data exporter to desired format
