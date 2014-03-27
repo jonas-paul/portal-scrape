@@ -1,0 +1,7 @@
+15min scrapers
+lrytas scrapers
+update process to use scrapers for all sites
+update process to collect metrics
+write metrics to db
+make windows service for continous background work
+review exception handling
