@@ -1,8 +1,8 @@
 ﻿namespace PortalScrape.Scraping.Delfi
 {
-    public class DelfiSection
+    public class Section
     {
-        public DelfiSection(string host, string relativeUrl, string description)
+        public Section(string host, string relativeUrl, string description)
         {
             Host = host;
             RelativeUrl = relativeUrl;

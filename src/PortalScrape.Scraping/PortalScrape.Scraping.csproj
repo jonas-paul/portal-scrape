@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PenkMin\PenkMin.cs" />
     <Compile Include="DelfiWordyDateParser.cs" />
     <Compile Include="Delfi\Delfi.cs" />
     <Compile Include="Delfi\DelfiCommentsScraper.cs" />

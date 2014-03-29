@@ -8,7 +8,7 @@ namespace PortalScrape.Scraping.Delfi
 {
     public class DelfiArticleInfoScraper
     {
-        public List<ArticleInfo> ScrapeForPeriod(DelfiSection section, TimeSpan period)
+        public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
         {
             var page = 1;
             var articleInfos = new List<ArticleInfo>();
@@ -28,7 +28,7 @@ namespace PortalScrape.Scraping.Delfi
             return articleInfos;
         }
 
-        public List<ArticleInfo> ScrapePage(DelfiSection section, int page)
+        public List<ArticleInfo> ScrapePage(Section section, int page)
         {
             var builder = new UriBuilder(section.Host);
             builder.Path += section.RelativeUrl;
