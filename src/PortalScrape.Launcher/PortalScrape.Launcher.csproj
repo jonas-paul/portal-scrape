@@ -48,6 +48,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PortalScrape.Processing\PortalScrape.Processing.csproj">
+      <Project>{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}</Project>
+      <Name>PortalScrape.Processing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PortalScrape.Scraping\PortalScrape.Scraping.csproj">
       <Project>{c98a0a0c-d0d6-4fdd-9eac-0a4380649a77}</Project>
       <Name>PortalScrape.Scraping</Name>
