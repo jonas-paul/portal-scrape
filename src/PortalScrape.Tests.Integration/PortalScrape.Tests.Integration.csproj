@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PenkMinScraping.cs" />
     <Compile Include="ProcessingTests.cs" />
     <Compile Include="Starter.cs" />
     <Compile Include="DataAccess\CreateDb.cs" />

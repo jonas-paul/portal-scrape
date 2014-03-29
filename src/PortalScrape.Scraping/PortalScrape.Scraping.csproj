@@ -54,6 +54,7 @@
     <Compile Include="Delfi\DelfiArticleInfoScraper.cs" />
     <Compile Include="Delfi\DelfiArticleScraper.cs" />
     <Compile Include="Delfi\DelfiSection.cs" />
+    <Compile Include="PenkMin\PenkMinArticleInfoScraper.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
