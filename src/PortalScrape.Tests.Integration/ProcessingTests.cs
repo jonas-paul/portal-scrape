@@ -8,6 +8,7 @@ using NUnit.Framework;
 using PortalScrape.DataAccess.Entities;
 using PortalScrape.Processing;
 
+
 namespace PortalScrape.Tests.Integration
 {
     [TestFixture]
