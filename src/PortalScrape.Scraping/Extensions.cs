@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Web;
 
 namespace PortalScrape.Scraping
@@ -28,6 +30,12 @@ namespace PortalScrape.Scraping
             var endIndex = s.IndexOf(toToken, startIndex, StringComparison.InvariantCultureIgnoreCase);
             if (endIndex == -1) return null;
             return s.Substring(startIndex, endIndex - startIndex);
+        }
+
+        public static DateTime ParseDateTime(this string dateTimeString)
+        {
+            var s = dateTimeString.Split(new []{'+'}, StringSplitOptions.None).First().Trim();
+            return DateTime.ParseExact(s, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
         }
     }
 }

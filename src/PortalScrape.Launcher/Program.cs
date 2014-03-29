@@ -18,7 +18,7 @@ namespace PortalScrape.Launcher
             //processingTests.OneFullCycle();
 
             var penkMin = new PenkMinScraping();
-            penkMin.ArticleInfo();
+            penkMin.Article();
 
             //Console.ReadKey();
         }

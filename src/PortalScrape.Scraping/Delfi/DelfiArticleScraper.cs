@@ -97,20 +97,14 @@ namespace PortalScrape.Scraping.Delfi
             // meta itemprop="datePublished" content="
             //2014-03-19T19:11:35+0200
             var node = docNode.SelectSingleNode("//meta[@itemprop='datePublished']");
-            return ParseDateTime(node.Attributes["content"].Value);
+            return node.Attributes["content"].Value.ParseDateTime();
         }
 
         private DateTime GetDateModified(HtmlNode docNode)
         {
             // meta itemprop="dateModified" content="
             var node = docNode.SelectSingleNode("//meta[@itemprop='dateModified']");
-            return ParseDateTime(node.Attributes["content"].Value);
-        }
-
-        private static DateTime ParseDateTime(string dateTimeString)
-        {
-            var s = dateTimeString.Substring(0, dateTimeString.Length - 5);
-            return DateTime.ParseExact(s, "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
+            return node.Attributes["content"].Value.ParseDateTime();
         }
     }
 }
