@@ -47,13 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Lrytas\Lrytas.cs" />
     <Compile Include="PenkMin\PenkMin.cs" />
     <Compile Include="DelfiWordyDateParser.cs" />
     <Compile Include="Delfi\Delfi.cs" />
     <Compile Include="Delfi\DelfiCommentsScraper.cs" />
     <Compile Include="Delfi\DelfiArticleInfoScraper.cs" />
     <Compile Include="Delfi\DelfiArticleScraper.cs" />
-    <Compile Include="Delfi\DelfiSection.cs" />
+    <Compile Include="Section.cs" />
     <Compile Include="PenkMin\PenkMinArticleInfoScraper.cs" />
     <Compile Include="PenkMin\PenkMinArticleScraper.cs" />
     <Compile Include="Utilities.cs" />

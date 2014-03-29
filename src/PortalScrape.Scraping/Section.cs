@@ -1,4 +1,4 @@
-﻿namespace PortalScrape.Scraping.Delfi
+﻿namespace PortalScrape.Scraping
 {
     public class Section
     {
