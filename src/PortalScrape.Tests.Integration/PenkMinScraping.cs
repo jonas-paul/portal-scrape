@@ -25,5 +25,12 @@ namespace PortalScrape.Tests.Integration
             var scr = new PenkMinArticleScraper();
             var article = scr.Scrape(new ArticleInfo { Url = "http://www.15min.lt/naujiena/aktualu/pasaulis/kabule-talibano-kovotojai-atakuoja-rinkimu-komisijos-bustine-57-415839?cf=vl" });
         }
+
+        [Test]
+        public void Commments()
+        {
+            var scr = new PenkMinCommentsScraper();
+            var comments = scr.ScrapeRange(new ArticleInfo { Url = "http://www.15min.lt/naujiena/aktualu/pasaulis/kabule-talibano-kovotojai-atakuoja-rinkimu-komisijos-bustine-57-415839?cf=vl" }, 2, 5);
+        }
     }
 }
