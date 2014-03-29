@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PortalScrape.DataAccess.Entities;
 using PortalScrape.Scraping.Delfi;
 
 namespace PortalScrape.Scraping.PenkMin
@@ -9,8 +10,8 @@ namespace PortalScrape.Scraping.PenkMin
 
         public static readonly List<Section> Sections = new List<Section>
             {
-                new Section(MainHost, "naujienos/aktualu/lietuva/", "lietuva"),
-                new Section(MainHost, "naujienos/aktualu/pasaulis/", "pasaulis"),
+                new Section(Portal.PenkMin, MainHost, "naujienos/aktualu/lietuva/", "lietuva"),
+                new Section(Portal.PenkMin, MainHost, "naujienos/aktualu/pasaulis/", "pasaulis"),
             };
     }
 }
