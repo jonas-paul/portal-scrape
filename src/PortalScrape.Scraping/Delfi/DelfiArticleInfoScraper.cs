@@ -68,7 +68,7 @@ namespace PortalScrape.Scraping.Delfi
                 throw new Exception("Delfi TV article");
             }
 
-            articleInfo.RefNo = Convert.ToInt32(articleInfo.Url.GetQueryParameterValueFromUrl("id"));
+            articleInfo.Id = articleInfo.Url.GetQueryParameterValueFromUrl("id");
             articleInfo.Title = linkToArticle.InnerText;
             articleInfo.DatePublished = DelfiWordyDateParser.Parse(dateDiv.InnerText);
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);

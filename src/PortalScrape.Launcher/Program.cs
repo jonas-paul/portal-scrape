@@ -14,11 +14,11 @@ namespace PortalScrape.Launcher
             //var dbTests = new CreateDb();
             //dbTests.ExportSchema();
 
-            //var processingTests = new ProcessingTests();
-            //processingTests.OneFullCycle();
+            var processingTests = new ProcessingTests();
+            processingTests.OneFullCycle();
 
-            var penkMin = new PenkMinScraping();
-            penkMin.Commments();
+            //var penkMin = new PenkMinScraping();
+            //penkMin.Commments();
 
             //Console.ReadKey();
         }

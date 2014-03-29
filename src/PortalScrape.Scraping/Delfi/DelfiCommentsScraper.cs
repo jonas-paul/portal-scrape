@@ -23,13 +23,13 @@ namespace PortalScrape.Scraping.Delfi
 
                 var docNode = Utilities.DownloadPage(url);
                 var commentNodes = docNode.SelectNodes("//ul[@id='comments-list']/li");
-                comments.AddRange(commentNodes.Select(cn => ParseComment(cn, articleInfo.RefNo)));
+                comments.AddRange(commentNodes.Select(cn => ParseComment(cn, articleInfo.Id)));
             }
 
             return comments.Take(to - from + 1).ToList();
         }
 
-        private static Comment ParseComment(HtmlNode commentNode, int articleRefNo)
+        private static Comment ParseComment(HtmlNode commentNode, string articleId)
         {
             var commentAnchor = commentNode.SelectSingleNode("a[@class='comment-list-comment-anchor']").Attributes["name"].Value;
 
@@ -43,14 +43,14 @@ namespace PortalScrape.Scraping.Delfi
             var votesParts = votesString.Split(new [] {":"}, StringSplitOptions.None);
 
             var comment = new Comment();
-            comment.ArticleRefNo = articleRefNo;
+            comment.ArticleId = articleId;
             comment.CommentText = commentNode.SelectSingleNode("div[contains(@class, 'comment-body')]").InnerText.Trim();
             comment.DateCreated = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             comment.DateScraped = DateTime.UtcNow.AddHours(2);
             comment.DownVotes = Convert.ToInt32(votesParts[2]);
             comment.IpAddress = ipString;
             comment.Portal = Portal.Delfi;
-            comment.RefNo = Convert.ToInt32(commentAnchor.Substring(1));
+            comment.Id = commentAnchor.Substring(1).Trim();
             comment.Upvotes = Convert.ToInt32(votesParts[1]);
             comment.UserName = authorNode.SelectSingleNode("h3").InnerText.Trim();
 

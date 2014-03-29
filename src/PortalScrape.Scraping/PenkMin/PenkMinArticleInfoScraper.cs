@@ -51,10 +51,8 @@ namespace PortalScrape.Scraping.PenkMin
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);
             articleInfo.CommentCount = commentCount;
             articleInfo.Portal = Portal.PenkMin;
-            articleInfo.RefNo =
-                Convert.ToInt32(
-                    articleInfo.Url.Split(new[] {'?'}, StringSplitOptions.None)[0].Split(new[] {"-"},
-                        StringSplitOptions.None).Last());
+            articleInfo.Id = articleInfo.Url.Split(new[] {'?'}, StringSplitOptions.None)[0].Split(new[] {"-"},
+                        StringSplitOptions.None).Last().Trim();
 
             return articleInfo;
         }

@@ -17,7 +17,7 @@ namespace PortalScrape.Scraping.Delfi
             return new Article
             {
                 Portal = articleInfo.Portal,
-                RefNo = articleInfo.RefNo,
+                Id = articleInfo.Id,
                 CommentCount = articleInfo.CommentCount,
                 Title = articleInfo.Title,
                 Url = articleInfo.Url,

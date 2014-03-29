@@ -30,13 +30,13 @@ namespace PortalScrape.Scraping.PenkMin
                 comments.AddRange(commentsFromJson.Select(c =>
                     new Comment
                     {
-                        ArticleRefNo = articleInfo.RefNo,
+                        ArticleId = articleInfo.Id,
                         CommentText = c.content,
                         DateCreated = ParseRelativeDate(c.date),
                         DateScraped = DateTime.UtcNow.AddHours(2),
                         IpAddress = c.ip,
                         Portal = Portal.PenkMin,
-                        RefNo = c.id,
+                        Id = c.id,
                         UserName = c.name,
                     }));
             }
@@ -46,7 +46,7 @@ namespace PortalScrape.Scraping.PenkMin
 
         private class CommentFromJson
         {
-            public int id { get; set; }
+            public string id { get; set; }
             public string name { get; set; }
             public string date { get; set; }
             public string content { get; set; }

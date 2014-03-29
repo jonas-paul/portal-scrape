@@ -11,7 +11,7 @@ namespace PortalScrape.DataAccess.Mappings
 
             CompositeId()
                 .KeyProperty(x => x.Portal)
-                .KeyProperty(x => x.RefNo);
+                .KeyProperty(x => x.Id);
             Map(x => x.DateScraped).Not.Nullable();
 
             Map(x => x.Url).Not.Nullable();
@@ -19,8 +19,8 @@ namespace PortalScrape.DataAccess.Mappings
             Map(x => x.DatePublished).Not.Nullable();
             Map(x => x.Title).Not.Nullable();
 
-            Map(x => x.CommentCountInDb).Formula("(SELECT COUNT(*) FROM Comments WHERE Comments.ArticleRefNo = RefNo)");
-            Map(x => x.HasArticleInDb).Formula("(SELECT 1 FROM Articles WHERE Articles.RefNo = RefNo)");
+            Map(x => x.CommentCountInDb).Formula("(SELECT COUNT(*) FROM Comments WHERE Comments.ArticleId = Id)");
+            Map(x => x.HasArticleInDb).Formula("(SELECT 1 FROM Articles WHERE Articles.Id = Id)");
         }
     }
 }

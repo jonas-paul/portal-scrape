@@ -46,7 +46,7 @@ namespace PortalScrape.Tests.Integration.DataAccess
         {
             using (var session = NHibernateHelper.OpenSession())
             {
-                var articleInfo = session.Query<ArticleInfo>().Where(ai => ai.RefNo == 64345502).ToList();
+                var articleInfo = session.Query<ArticleInfo>().Where(ai => ai.Id == "64345502").ToList();
             }
         }
 
