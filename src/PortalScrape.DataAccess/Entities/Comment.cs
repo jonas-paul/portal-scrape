@@ -23,14 +23,14 @@ namespace PortalScrape.DataAccess.Entities
             var comment = obj as Comment;
             if (comment == null) return false;
 
-            return comment.Portal == Portal && comment.Id == Id;
+            return comment.Portal == Portal && comment.Id == Id && comment.ArticleId == ArticleId;
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return Id.GetHashCode() * 23 + Portal.GetHashCode();
+                return (Id.GetHashCode() * 23 + Portal.GetHashCode()) * 23 + ArticleId.GetHashCode();
             }
         }
     }

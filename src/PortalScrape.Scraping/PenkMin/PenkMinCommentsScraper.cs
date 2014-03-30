@@ -13,7 +13,7 @@ namespace PortalScrape.Scraping.PenkMin
         {
             var comments = new List<Comment>();
 
-            for (var page = (from - 1) % 50 + 1; page <= (to - 1) % 50 + 1; page++)
+            for (var page = (from - 1) / 50 + 1; page <= (to - 1) / 50 + 1; page++)
             {
                 var url = articleInfo.Url;
                 url = url.AddQueryParameterToUrl("comments", "");

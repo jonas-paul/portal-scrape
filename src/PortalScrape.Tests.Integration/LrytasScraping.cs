@@ -26,8 +26,8 @@ namespace PortalScrape.Tests.Integration
         [Test]
         public void Commments()
         {
-            //var scr = new PenkMinCommentsScraper();
-            //var comments = scr.ScrapeRange(new ArticleInfo { Url = "http://www.15min.lt/naujiena/aktualu/pasaulis/kabule-talibano-kovotojai-atakuoja-rinkimu-komisijos-bustine-57-415839?cf=vl" }, 2, 5);
+            var scr = new LrytasCommentsScraper();
+            var comments = scr.ScrapeRange(new ArticleInfo { Id = "13960425731395759508" }, 270, 500);
         }
     }
 }
