@@ -12,8 +12,8 @@ namespace PortalScrape.Processing
     {
         public void Run()
         {
-            var articlePeriod = TimeSpan.FromHours(6);
-            const int commentDifferenceToTriggerUpdate = 5;
+            var articlePeriod = TimeSpan.FromHours(30);
+            const int commentDifferenceToTriggerUpdate = 20;
             const int commentDifferenceToTriggerFetch = 20;
 
             var articleOrders = new List<ArticleInfo>();
@@ -28,7 +28,7 @@ namespace PortalScrape.Processing
             {
                 var currentInfos = session.Query<ArticleInfo>().Where(ai => ai.DatePublished > cutOffTime).ToList();
 
-                foreach (var delfiSection in Delfi.Sections.Take(3))
+                foreach (var delfiSection in Delfi.Sections.Take(10))
                 {
                     Console.WriteLine("Scraping section {0}...", delfiSection.Description);
                     var scrapedInfos = articleInfoScraper.ScrapeForPeriod(delfiSection, articlePeriod).Distinct().ToList();

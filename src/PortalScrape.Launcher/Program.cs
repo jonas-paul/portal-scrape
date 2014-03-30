@@ -27,7 +27,7 @@ namespace PortalScrape.Launcher
             //export.Run();
 
             var lrytas = new LrytasScraping();
-            lrytas.ArticleInfo();
+            lrytas.Article();
 
             //Console.ReadKey();
         }

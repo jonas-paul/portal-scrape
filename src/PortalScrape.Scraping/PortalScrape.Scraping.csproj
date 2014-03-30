@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Lrytas\Lrytas.cs" />
     <Compile Include="Lrytas\LrytasArticleInfoScraper.cs" />
+    <Compile Include="Lrytas\LrytasArticleScraper.cs" />
     <Compile Include="PenkMin\PenkMin.cs" />
     <Compile Include="DelfiWordyDateParser.cs" />
     <Compile Include="Delfi\Delfi.cs" />
