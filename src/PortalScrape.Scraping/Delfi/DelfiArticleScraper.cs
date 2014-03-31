@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Delfi
 {
-    public class DelfiArticleScraper
+    public class DelfiArticleScraper : IArticleScraper
     {
+        public Portal Portal { get { return Portal.Delfi; } }
+
         public Article Scrape(ArticleInfo articleInfo)
         {
             var docNode = Utilities.DownloadPage(articleInfo.Url);

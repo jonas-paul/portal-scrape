@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Lrytas
 {
-    public class LrytasArticleScraper
+    public class LrytasArticleScraper : IArticleScraper
     {
+        public Portal Portal { get { return Portal.Lrytas; } }
+
         public Article Scrape(ArticleInfo articleInfo)
         {
             var docNode = Utilities.DownloadPage(articleInfo.Url);
@@ -34,19 +37,51 @@ namespace PortalScrape.Scraping.Lrytas
 
         private string GetAuthorName(HtmlNode docNode)
         {
-            return docNode.SelectSingleNode(".//strong[@itemprop='author']").InnerText;
+            var authorNode = docNode.SelectSingleNode(".//strong[@itemprop='author']");
+            if (authorNode == null)
+            {
+                authorNode = docNode.SelectSingleNode(".//div[@class='rtl-info']/strong");
+            }
+            return authorNode != null ? authorNode.InnerText.Trim() : null;
         }
 
-        private DateTime GetDatePublished(HtmlNode docNode)
+        private DateTime? GetDatePublished(HtmlNode docNode)
         {
             var node = docNode.SelectSingleNode("//meta[@itemprop='datePublished']");
-            return node.Attributes["content"].Value.ParseDateTime();
+            if (node != null)
+            {
+                return node.Attributes["content"].Value.ParseDateTime();
+            }
+
+            node = docNode.SelectSingleNode(".//div[@class='rtl-info']/span");
+
+            return node != null
+                ? DateTime.ParseExact(node.InnerText.Split(new[] { ", atnaujinta " }, StringSplitOptions.None).First(), "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
+                : (DateTime?)null;
         }
 
-        private DateTime GetDateModified(HtmlNode docNode)
+        private DateTime? GetDateModified(HtmlNode docNode)
         {
             var node = docNode.SelectSingleNode("//meta[@itemprop='dateModified']");
-            return node != null ? node.Attributes["content"].Value.ParseDateTime() : new DateTime();
+            if (node != null)
+            {
+                return node.Attributes["content"].Value.ParseDateTime();
+            }
+
+            node = docNode.SelectSingleNode(".//div[@class='rtl-info']/span");
+
+            if (node == null)
+            {
+                return null;
+            }
+
+            var parts = node.InnerText.Split(new[] { ", atnaujinta " }, StringSplitOptions.None);
+            if (parts.Count() != 2)
+            {
+                return null;
+            }
+
+            return DateTime.ParseExact(parts[1], "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
         }
     }
 }

@@ -8,8 +8,10 @@ using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Lrytas
 {
-    public class LrytasCommentsScraper
+    public class LrytasCommentsScraper : ICommentsScraper
     {
+        public Portal Portal { get { return Portal.Lrytas; } }
+
         public List<Comment> ScrapeRange(ArticleInfo articleInfo, int from, int to)
         {
             var comments = new List<Comment>();
@@ -28,9 +30,16 @@ namespace PortalScrape.Scraping.Lrytas
 
                 if (page == 1)
                 {
-                    var pageNumberNodes = docNode.SelectNodes(".//div[@class='str-pages-div']/a");
-                    var pageCount = Convert.ToInt32(pageNumberNodes[pageNumberNodes.Count - 2].InnerText);
-                    pagesToScrape = pageCount - (@from / 25);
+                    try
+                    {
+                        var pageNumberNodes = docNode.SelectNodes(".//div[@class='str-pages-div']/a");
+                        var pageCount = Convert.ToInt32(pageNumberNodes[pageNumberNodes.Count - 2].InnerText);
+                        pagesToScrape = pageCount - (@from / 25);
+                    }
+                    catch (Exception)
+                    {
+                        pagesToScrape = 1;
+                    }
                 }
 
                 var commentNodes = docNode.SelectNodes(".//div[@class='comment']");

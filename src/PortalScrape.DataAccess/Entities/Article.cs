@@ -10,8 +10,8 @@ namespace PortalScrape.DataAccess.Entities
         
         public virtual string Url { get; set; }
         public virtual int CommentCount { get; set; }
-        public virtual DateTime DatePublished { get; set; }
-        public virtual DateTime DateModified { get; set; }
+        public virtual DateTime? DatePublished { get; set; }
+        public virtual DateTime? DateModified { get; set; }
 
         public virtual string Title { get; set; }
         public virtual string AuthorName { get; set; }

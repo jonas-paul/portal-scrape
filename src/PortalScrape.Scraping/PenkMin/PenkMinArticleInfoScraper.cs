@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using PortalScrape.DataAccess.Entities;
-using PortalScrape.Scraping.Delfi;
 
 namespace PortalScrape.Scraping.PenkMin
 {
-    public class PenkMinArticleInfoScraper
+    public class PenkMinArticleInfoScraper : IArticleInfoScraper
     {
+        public Portal Portal { get { return Portal.PenkMin; } }
+
+        public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
+        {
+            return ScrapeSection(section);
+        }
+
         public List<ArticleInfo> ScrapeSection(Section section)
         {
             var builder = new UriBuilder(section.Host);

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using HtmlAgilityPack;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.PenkMin
 {
-    public class PenkMinArticleScraper
+    public class PenkMinArticleScraper : IArticleScraper
     {
+        public Portal Portal { get { return Portal.PenkMin; } }
+
         public Article Scrape(ArticleInfo articleInfo)
         {
             var docNode = Utilities.DownloadPage(articleInfo.Url);
@@ -33,7 +33,12 @@ namespace PortalScrape.Scraping.PenkMin
         private string GetBody(HtmlNode docNode)
         {
             var intro = docNode.SelectSingleNode("//div[@class='intro']").InnerText.Trim();
-            var paragraphs = docNode.SelectNodes("//div[@itemprop='articleBody']/p").Select(p => p.InnerText.Trim());
+            var paragraphNodes = docNode.SelectNodes("//div[@itemprop='articleBody']/p");
+            var paragraphs = new List<string>();
+            if (paragraphNodes != null)
+            {
+                paragraphs = paragraphNodes.Select(p => p.InnerText.Trim()).ToList();
+            }
             var parts = new List<string>();
             parts.Add(intro);
             parts.AddRange(paragraphs);
@@ -45,7 +50,8 @@ namespace PortalScrape.Scraping.PenkMin
 
         private string GetAuthorName(HtmlNode docNode)
         {
-            return docNode.SelectSingleNode("//div[@class='author']/strong").InnerText;
+            var node = docNode.SelectSingleNode("//div[@class='author']/strong");
+            return node != null ? node.InnerText.Trim() : null;
         }
 
         private DateTime GetDatePublished(HtmlNode docNode)

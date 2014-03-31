@@ -6,8 +6,10 @@ using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Delfi
 {
-    public class DelfiArticleInfoScraper
+    public class DelfiArticleInfoScraper : IArticleInfoScraper
     {
+        public Portal Portal { get { return Portal.Delfi; } }
+
         public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
         {
             var page = 1;

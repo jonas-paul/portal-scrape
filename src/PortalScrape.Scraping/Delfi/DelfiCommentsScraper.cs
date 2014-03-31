@@ -8,8 +8,10 @@ using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Delfi
 {
-    public class DelfiCommentsScraper
+    public class DelfiCommentsScraper : ICommentsScraper
     {
+        public Portal Portal { get { return Portal.Delfi; } }
+
         public List<Comment> ScrapeRange(ArticleInfo articleInfo, int from, int to)
         {
             var comments = new List<Comment>();

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Security.Policy;
 using HtmlAgilityPack;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Lrytas
 {
-    public class LrytasArticleInfoScraper
+    public class LrytasArticleInfoScraper : IArticleInfoScraper
     {
+        public Portal Portal { get { return Portal.Lrytas; } }
+
         public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
         {
             var page = 1;

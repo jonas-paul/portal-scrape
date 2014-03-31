@@ -16,7 +16,7 @@ namespace PortalScrape.DataAccess.Mappings
 
             Map(x => x.Url).Not.Nullable();
             Map(x => x.CommentCount).Not.Nullable();
-            Map(x => x.DatePublished).Not.Nullable();
+            Map(x => x.DatePublished);
             Map(x => x.DateModified);
 
             Map(x => x.Title).Not.Nullable();

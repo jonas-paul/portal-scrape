@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IArticleScraper.cs" />
+    <Compile Include="IArticleInfoScraper.cs" />
+    <Compile Include="ICommentsScraper.cs" />
     <Compile Include="Lrytas\Lrytas.cs" />
     <Compile Include="Lrytas\LrytasArticleInfoScraper.cs" />
     <Compile Include="Lrytas\LrytasArticleScraper.cs" />

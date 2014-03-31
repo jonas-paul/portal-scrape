@@ -7,8 +7,10 @@ using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.PenkMin
 {
-    public class PenkMinCommentsScraper
+    public class PenkMinCommentsScraper : ICommentsScraper
     {
+        public Portal Portal { get { return Portal.PenkMin; } }
+
         public List<Comment> ScrapeRange(ArticleInfo articleInfo, int from, int to)
         {
             var comments = new List<Comment>();

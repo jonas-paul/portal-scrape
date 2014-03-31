@@ -17,8 +17,8 @@ namespace PortalScrape.Launcher
             //var dbTests = new CreateDb();
             //dbTests.ExportSchema();
 
-            //var processingTests = new ProcessingTests();
-            //processingTests.OneFullCycle();
+            var processingTests = new ProcessingTests();
+            processingTests.OneFullCycle();
 
             //var penkMin = new PenkMinScraping();
             //penkMin.Commments();
@@ -26,8 +26,8 @@ namespace PortalScrape.Launcher
             //var export = new Export();
             //export.Run();
 
-            var lrytas = new LrytasScraping();
-            lrytas.Commments();
+            //var lrytas = new LrytasScraping();
+            //lrytas.Commments();
 
             //Console.ReadKey();
         }
