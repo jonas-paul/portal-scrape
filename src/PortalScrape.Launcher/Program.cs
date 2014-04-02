@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using PortalScrape.Processing;
-using PortalScrape.Scraping.Lrytas;
 using PortalScrape.Tests.Integration;
 using PortalScrape.Tests.Integration.DataAccess;
 
