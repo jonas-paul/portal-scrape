@@ -19,7 +19,7 @@ namespace PortalScrape.Tests.Integration
         {
             var cfg = new ProcessConfiguration
             {
-                Period = TimeSpan.FromHours(30),
+                Period = TimeSpan.FromHours(3),
                 CommentsUpdateThreshold = 20,
                 ArticleFetchThreshold = 10,
             };

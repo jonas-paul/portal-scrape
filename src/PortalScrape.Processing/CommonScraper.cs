@@ -34,23 +34,50 @@ namespace PortalScrape.Processing
 
         public List<ArticleInfo> ArticleInfos(Section section, TimeSpan period)
         {
-            return _articleInfoScrapers
-                .First(s => s.Portal == section.Portal)
-                .ScrapeForPeriod(section, period);
+            try
+            {
+                return _articleInfoScrapers
+                    .First(s => s.Portal == section.Portal)
+                    .ScrapeForPeriod(section, period);
+            }
+            catch (Exception e)
+            {
+                // TODO: log error
+            }
+
+            return new List<ArticleInfo>();
         }
 
         public Article Article(ArticleInfo articleInfo)
         {
-            return _articleScrapers
-                .First(s => s.Portal == articleInfo.Portal)
-                .Scrape(articleInfo);
+            try
+            {
+                return _articleScrapers
+                    .First(s => s.Portal == articleInfo.Portal)
+                    .Scrape(articleInfo);
+            }
+            catch (Exception)
+            {
+                // TODO: log error
+            }
+
+            return null;
         }
 
         public List<Comment> Comments(ArticleInfo articleInfo, int from, int to)
         {
-            return _commentScrapers
-                .First(s => s.Portal == articleInfo.Portal)
-                .ScrapeRange(articleInfo, from, to);
+            try
+            {
+                return _commentScrapers
+                    .First(s => s.Portal == articleInfo.Portal)
+                    .ScrapeRange(articleInfo, from, to);
+            }
+            catch (Exception e)
+            {
+                // TODO: log error
+            }
+
+            return new List<Comment>();
         }
     }
 }

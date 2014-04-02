@@ -77,10 +77,13 @@ namespace PortalScrape.Processing
                 {
                     Console.WriteLine("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Portal);
                     var article = scrape.Article(articleOrder);
+                    if (article == null) continue;
                     session.SaveOrUpdate(article);
                 }
 
                 session.Flush();
+
+                var commentsCounter = 0;
 
                 foreach (var commentsOrder in commentsOrders)
                 {
@@ -89,6 +92,9 @@ namespace PortalScrape.Processing
                     comments.ForEach(session.SaveOrUpdate);
 
                     session.Flush();
+
+                    commentsCounter += comments.Count;
+                    Console.WriteLine("Total comments scraped: {0}", commentsCounter);
                 }
             }
 
