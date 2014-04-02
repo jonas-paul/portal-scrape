@@ -17,8 +17,15 @@ namespace PortalScrape.Tests.Integration
         [Test]
         public void OneFullCycle()
         {
+            var cfg = new ProcessConfiguration
+            {
+                Period = TimeSpan.FromHours(30),
+                CommentsUpdateThreshold = 20,
+                ArticleFetchThreshold = 10,
+            };
+
             var process = new Process();
-            process.Run();
+            process.Run(cfg);
         }
     }
 }
