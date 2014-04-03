@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using NHibernate.Linq;
 using PortalScrape.DataAccess;
 using PortalScrape.DataAccess.Entities;
@@ -13,6 +13,8 @@ namespace PortalScrape.Processing
 {
     public class Process
     {
+        private ILog _log = LogManager.GetLogger(typeof (Process));
+
         public void Run(ProcessConfiguration cfg)
         {
             var articleOrders = new List<ArticleInfo>();
@@ -31,9 +33,9 @@ namespace PortalScrape.Processing
 
                 foreach (var section in sections)
                 {
-                    Console.WriteLine("Scraping section {0} in portal {1}...", section.Description, section.Portal);
+                    _log.InfoFormat("Scraping section {0} in portal {1}...", section.Description, section.Portal);
                     var scrapedInfos = scrape.ArticleInfos(section, cfg.Period).Distinct().ToList();
-                    Console.WriteLine("{0} articles found.", scrapedInfos.Count);
+                    _log.InfoFormat("{0} articles found.", scrapedInfos.Count);
 
                     foreach (var scrapedInfo in scrapedInfos)
                     {
@@ -70,12 +72,12 @@ namespace PortalScrape.Processing
 
                 session.Flush();
 
-                Console.WriteLine("{0} article orders issued.", articleOrders.Count);
-                Console.WriteLine("{0} comments orders issued.", commentsOrders.Count);
+                _log.InfoFormat("{0} article orders issued.", articleOrders.Count);
+                _log.InfoFormat("{0} comments orders issued.", commentsOrders.Count);
 
                 foreach (var articleOrder in articleOrders)
                 {
-                    Console.WriteLine("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Portal);
+                    _log.InfoFormat("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Portal);
                     var article = scrape.Article(articleOrder);
                     if (article == null) continue;
                     session.SaveOrUpdate(article);
@@ -87,18 +89,18 @@ namespace PortalScrape.Processing
 
                 foreach (var commentsOrder in commentsOrders)
                 {
-                    Console.WriteLine("Scraping comments for article '{0}' in portal {1}...", commentsOrder.Title, commentsOrder.Portal);
+                    _log.InfoFormat("Scraping comments for article '{0}' in portal {1}...", commentsOrder.Title, commentsOrder.Portal);
                     var comments = scrape.Comments(commentsOrder, commentsOrder.CommentCountInDb, commentsOrder.CommentCount).Distinct().ToList();
                     comments.ForEach(session.SaveOrUpdate);
 
                     session.Flush();
 
                     commentsCounter += comments.Count;
-                    Console.WriteLine("Total comments scraped: {0}", commentsCounter);
+                    _log.InfoFormat("Total comments scraped: {0}", commentsCounter);
                 }
             }
 
-            Console.WriteLine("Finished for now.");
+            _log.InfoFormat("Finished for now.");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 using PortalScrape.DataAccess.Entities;
 using PortalScrape.Scraping;
 using PortalScrape.Scraping.Delfi;
@@ -11,6 +12,8 @@ namespace PortalScrape.Processing
 {
     public class CommonScraper
     {
+        private readonly ILog _log = LogManager.GetLogger(typeof (CommonScraper));
+
         readonly List<IArticleInfoScraper> _articleInfoScrapers = new List<IArticleInfoScraper>
             {
                 new DelfiArticleInfoScraper(),
@@ -42,7 +45,9 @@ namespace PortalScrape.Processing
             }
             catch (Exception e)
             {
-                // TODO: log error
+                e.Data["section"] = section;
+                e.Data["period"] = period;
+                _log.Error("An error occurred while scraping article infos.", e);
             }
 
             return new List<ArticleInfo>();
@@ -56,9 +61,10 @@ namespace PortalScrape.Processing
                     .First(s => s.Portal == articleInfo.Portal)
                     .Scrape(articleInfo);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // TODO: log error
+                e.Data["articleInfo"] = articleInfo;
+                _log.Error("An error occurred while scraping article.", e);
             }
 
             return null;
@@ -74,7 +80,10 @@ namespace PortalScrape.Processing
             }
             catch (Exception e)
             {
-                // TODO: log error
+                e.Data["articleInfo"] = articleInfo;
+                e.Data["from"] = from;
+                e.Data["to"] = to;
+                _log.Error("An error occurred while scraping comments.", e);
             }
 
             return new List<Comment>();

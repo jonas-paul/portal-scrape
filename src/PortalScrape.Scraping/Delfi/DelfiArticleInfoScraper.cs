@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using HtmlAgilityPack;
+using log4net;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Delfi
 {
     public class DelfiArticleInfoScraper : IArticleInfoScraper
     {
+        private readonly ILog _log = LogManager.GetLogger(typeof (DelfiArticleInfoScraper));
+
         public Portal Portal { get { return Portal.Delfi; } }
 
         public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
@@ -49,7 +53,8 @@ namespace PortalScrape.Scraping.Delfi
                 }
                 catch (Exception e)
                 {
-                    // TODO: log exception
+                    e.Data["articleDiv"] = articleDiv.OuterHtml;
+                    _log.Error("An error occurred while parsing article info div.", e);
                 }
             }
 

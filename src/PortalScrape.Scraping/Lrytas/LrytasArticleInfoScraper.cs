@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
+using log4net;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.Lrytas
 {
     public class LrytasArticleInfoScraper : IArticleInfoScraper
     {
+        private readonly ILog _log = LogManager.GetLogger(typeof(LrytasArticleInfoScraper));
+
         public Portal Portal { get { return Portal.Lrytas; } }
 
         public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
@@ -50,7 +53,8 @@ namespace PortalScrape.Scraping.Lrytas
                 }
                 catch (Exception e)
                 {
-                    // TODO: log exception
+                    e.Data["articleDiv"] = articleDiv.OuterHtml;
+                    _log.Error("An error occurred while parsing article info div.", e);
                 }
             }
 

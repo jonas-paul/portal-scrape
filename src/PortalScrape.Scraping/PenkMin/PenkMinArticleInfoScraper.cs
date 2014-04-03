@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
+using log4net;
 using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping.PenkMin
 {
     public class PenkMinArticleInfoScraper : IArticleInfoScraper
     {
+        private readonly ILog _log = LogManager.GetLogger(typeof(PenkMinArticleInfoScraper));
+
         public Portal Portal { get { return Portal.PenkMin; } }
 
         public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
@@ -34,7 +37,8 @@ namespace PortalScrape.Scraping.PenkMin
                 }
                 catch (Exception e)
                 {
-                    // TODO: log exception
+                    e.Data["articleDiv"] = articleDiv.OuterHtml;
+                    _log.Error("An error occurred while parsing article info div.", e);
                 }
             }
 

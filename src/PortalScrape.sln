@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Launcher", "PortalScrape.Launcher\PortalScrape.Launcher.csproj", "{ADEA74B3-2F94-4851-B8B9-7C9AADE3ECA0}"
-EndProject
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Scraping", "PortalScrape.Scraping\PortalScrape.Scraping.csproj", "{C98A0A0C-D0D6-4FDD-9EAC-0A4380649A77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Tests.Integration", "PortalScrape.Tests.Integration\PortalScrape.Tests.Integration.csproj", "{70B4C356-A490-4D28-BC8D-9FBACD07FF9C}"
@@ -18,16 +18,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9A13E7
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Host", "PortalScrape.Host\PortalScrape.Host.csproj", "{9C391544-11CE-4776-9421-88D2B1AE7A5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ADEA74B3-2F94-4851-B8B9-7C9AADE3ECA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADEA74B3-2F94-4851-B8B9-7C9AADE3ECA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADEA74B3-2F94-4851-B8B9-7C9AADE3ECA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADEA74B3-2F94-4851-B8B9-7C9AADE3ECA0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C98A0A0C-D0D6-4FDD-9EAC-0A4380649A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C98A0A0C-D0D6-4FDD-9EAC-0A4380649A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C98A0A0C-D0D6-4FDD-9EAC-0A4380649A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,6 +42,10 @@ Global
 		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8D92C3A-9FB8-40A0-A85C-F27A4DB106F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
