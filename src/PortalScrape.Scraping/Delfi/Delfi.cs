@@ -22,8 +22,7 @@ namespace PortalScrape.Scraping.Delfi
                 new Section(Portal.Delfi, MainHost, "verslas/energetika/", "LT::Verslas::Energetika"),
                 new Section(Portal.Delfi, MainHost, "verslas/verslas/", "LT::Verslas::Verslo naujienos"),
                 new Section(Portal.Delfi, MainHost, "verslas/manolitai/", "LT::Verslas::Mano litai"),
-                new Section(Portal.Delfi, MainHost, "verslas/nekilnojamas-turtas/",
-                                 "LT::Verslas::Nekilnojamasis turtas"),
+                new Section(Portal.Delfi, MainHost, "verslas/nekilnojamas-turtas/", "LT::Verslas::Nekilnojamasis turtas"),
                 new Section(Portal.Delfi, MainHost, "verslas/transportas/", "LT::Verslas::Transportas"),
                 new Section(Portal.Delfi, MainHost, "verslas/media/", "LT::Verslas::Media"),
                 new Section(Portal.Delfi, MainHost, "verslas/rinka/", "LT::Verslas::Rinkos"),
@@ -31,8 +30,8 @@ namespace PortalScrape.Scraping.Delfi
                 new Section(Portal.Delfi, MainHost, "verslas/kaimas/", "LT::Verslas::Kaimo naujienos"),
                 new Section(Portal.Delfi, MainHost, "sportas/krepsinis/", "LT::Sportas::Krepšinis"),
                 new Section(Portal.Delfi, MainHost, "pilietis/voxpopuli/", "LT::Pilietis::Vox Populi"),
-                new Section(Portal.Delfi, RussianHost, "news/politics/", "RU::RU DELFI::Политика"),
-                new Section(Portal.Delfi, RussianHost, "news/es/", "RU::RU DELFI::Европейский дневник"),
+                //new Section(Portal.Delfi, RussianHost, "news/politics/", "RU::RU DELFI::Политика"),
+                //new Section(Portal.Delfi, RussianHost, "news/es/", "RU::RU DELFI::Европейский дневник"),
             };
     }
 }
