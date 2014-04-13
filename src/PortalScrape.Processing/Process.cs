@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using log4net;
 using NHibernate.Linq;
@@ -13,10 +14,12 @@ namespace PortalScrape.Processing
 {
     public class Process
     {
-        private ILog _log = LogManager.GetLogger(typeof (Process));
+        private readonly ILog _log = LogManager.GetLogger(typeof (Process));
 
         public void Run(ProcessConfiguration cfg)
         {
+            _log.Info("Process started.");
+
             var articleOrders = new List<ArticleInfo>();
             var commentsOrders = new List<ArticleInfo>();
 
@@ -34,7 +37,7 @@ namespace PortalScrape.Processing
                 foreach (var section in sections)
                 {
                     _log.InfoFormat("Scraping section {0} in portal {1}...", section.Description, section.Portal);
-                    var scrapedInfos = scrape.ArticleInfos(section, cfg.Period).Distinct().ToList();
+                    var scrapedInfos = scrape.ArticleInfos(section, TimeSpan.FromMinutes(cfg.PeriodInMinutes)).Distinct().ToList();
                     _log.InfoFormat("{0} articles found.", scrapedInfos.Count);
 
                     foreach (var scrapedInfo in scrapedInfos)
@@ -100,7 +103,7 @@ namespace PortalScrape.Processing
                 }
             }
 
-            _log.InfoFormat("Finished for now.");
+            _log.Info("Process finished.");
         }
     }
 }

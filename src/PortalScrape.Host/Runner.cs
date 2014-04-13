@@ -12,12 +12,7 @@ namespace PortalScrape.Host
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            var cfg = new ProcessConfiguration
-            {
-                Period = TimeSpan.FromHours(3),
-                CommentsUpdateThreshold = 20,
-                ArticleFetchThreshold = 10,
-            };
+            var cfg = ProcessConfiguration.FromAppConfig();
 
             _timer = new Timer(state => new Process().Run(cfg), null, TimeSpan.FromSeconds(0), TimeSpan.FromMinutes(30));
         }
