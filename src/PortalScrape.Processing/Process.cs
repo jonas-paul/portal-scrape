@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using log4net;
 using NHibernate.Linq;
 using PortalScrape.DataAccess;
 using PortalScrape.DataAccess.Entities;
-using PortalScrape.Scraping;
-using PortalScrape.Scraping.Delfi;
-using PortalScrape.Scraping.Lrytas;
-using PortalScrape.Scraping.PenkMin;
 
 namespace PortalScrape.Processing
 {
     public class Process
     {
         private readonly ILog _log = LogManager.GetLogger(typeof (Process));
+        private ProcessMetrics _metrics;
 
         public void Run(ProcessConfiguration cfg)
         {
+            _metrics = new ProcessMetrics();
+            _metrics.NotifyProcessStarted();
+
             _log.Info("Process started.");
 
             var articleOrders = new List<ArticleInfo>();
@@ -25,20 +26,15 @@ namespace PortalScrape.Processing
 
             var scrape = new CommonScraper();
 
-            var sections = new List<Section>();
-            sections.AddRange(Delfi.Sections.Take(2));
-            sections.AddRange(Lrytas.Sections);
-            sections.AddRange(PenkMin.Sections);
-
             using (var session = NHibernateHelper.OpenSession())
             {
                 var currentInfos = session.Query<ArticleInfo>().ToList();
 
-                foreach (var section in sections)
+                foreach (var section in cfg.Sections)
                 {
-                    _log.InfoFormat("Scraping section {0} in portal {1}...", section.Description, section.Portal);
+                    _log.DebugFormat("Scraping section {0} in portal {1}...", section.Description, section.Portal);
                     var scrapedInfos = scrape.ArticleInfos(section, TimeSpan.FromMinutes(cfg.PeriodInMinutes)).Distinct().ToList();
-                    _log.InfoFormat("{0} articles found.", scrapedInfos.Count);
+                    _log.DebugFormat("{0} articles found.", scrapedInfos.Count);
 
                     foreach (var scrapedInfo in scrapedInfos)
                     {
@@ -75,15 +71,19 @@ namespace PortalScrape.Processing
 
                 session.Flush();
 
+                _metrics.ArticleOrders = articleOrders.Count;
+                _metrics.CommentsOrders = commentsOrders.Count;
+
                 _log.InfoFormat("{0} article orders issued.", articleOrders.Count);
                 _log.InfoFormat("{0} comments orders issued.", commentsOrders.Count);
 
                 foreach (var articleOrder in articleOrders)
                 {
-                    _log.InfoFormat("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Portal);
+                    _log.DebugFormat("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Portal);
                     var article = scrape.Article(articleOrder);
                     if (article == null) continue;
                     session.SaveOrUpdate(article);
+                    _metrics.ArticlesScraped++;
                 }
 
                 session.Flush();
@@ -92,18 +92,23 @@ namespace PortalScrape.Processing
 
                 foreach (var commentsOrder in commentsOrders)
                 {
-                    _log.InfoFormat("Scraping comments for article '{0}' in portal {1}...", commentsOrder.Title, commentsOrder.Portal);
+                    _log.DebugFormat("Scraping comments for article '{0}' in portal {1}...", commentsOrder.Title, commentsOrder.Portal);
                     var comments = scrape.Comments(commentsOrder, commentsOrder.CommentCountInDb, commentsOrder.CommentCount).Distinct().ToList();
                     comments.ForEach(session.SaveOrUpdate);
 
                     session.Flush();
 
                     commentsCounter += comments.Count;
-                    _log.InfoFormat("Total comments scraped: {0}", commentsCounter);
+                    _log.DebugFormat("Total comments scraped: {0}", commentsCounter);
+                    _metrics.CommentsScraped += comments.Count;
                 }
-            }
 
-            _log.Info("Process finished.");
+                _log.Info("Process finished.");
+
+                _metrics.NotifyProcessFinished();
+                session.Save(_metrics);
+                session.Flush();
+            }
         }
     }
 }

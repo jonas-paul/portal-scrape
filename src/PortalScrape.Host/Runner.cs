@@ -12,9 +12,9 @@ namespace PortalScrape.Host
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            var cfg = ProcessConfiguration.FromAppConfig();
+            var cfg = new ProcessConfiguration(2, 10, 20, Scope.Minimal);
 
-            _timer = new Timer(state => new Process().Run(cfg), null, TimeSpan.FromSeconds(0), TimeSpan.FromMinutes(30));
+            _timer = new Timer(state => new Process().Run(cfg), null, TimeSpan.FromSeconds(0), TimeSpan.FromMinutes(cfg.PeriodInMinutes));
         }
 
         public void Stop()
