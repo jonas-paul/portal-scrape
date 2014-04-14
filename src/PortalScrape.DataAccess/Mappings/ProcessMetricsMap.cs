@@ -10,7 +10,7 @@ namespace PortalScrape.DataAccess.Mappings
             Table("ProcessMetrics");
 
             Id(x => x.StartTime);
-            Map(x => x.SecondsTaken).Not.Nullable();
+            Map(x => x.MinutesTaken).Not.Nullable();
             Map(x => x.ArticleOrders).Not.Nullable();
             Map(x => x.ArticlesScraped).Not.Nullable();
             Map(x => x.CommentsOrders).Not.Nullable();

@@ -8,7 +8,7 @@ namespace PortalScrape.DataAccess.Entities
         private Stopwatch _watch;
 
         public virtual DateTime StartTime { get; set; }
-        public virtual int SecondsTaken { get; set; }
+        public virtual double MinutesTaken { get; set; }
         public virtual int ArticleOrders { get; set; }
         public virtual int CommentsOrders { get; set; }
         public virtual int ArticlesScraped { get; set; }
@@ -24,7 +24,7 @@ namespace PortalScrape.DataAccess.Entities
         public virtual void NotifyProcessFinished()
         {
             _watch.Stop();
-            SecondsTaken = (int)(_watch.ElapsedMilliseconds / 1000);
+            MinutesTaken = _watch.Elapsed.TotalMinutes;
         }
     }
 }

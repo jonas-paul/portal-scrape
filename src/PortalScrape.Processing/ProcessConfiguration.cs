@@ -11,9 +11,9 @@ namespace PortalScrape.Processing
 {
     public class ProcessConfiguration
     {
-        public ProcessConfiguration(int periodInMinutes, int commentsUpdateThreshold, int articleFetchThreshold, Scope scope)
+        public ProcessConfiguration(int periodInHours, int commentsUpdateThreshold, int articleFetchThreshold, Scope scope)
         {
-            PeriodInMinutes = periodInMinutes;
+            PeriodInHours = periodInHours;
             CommentsUpdateThreshold = commentsUpdateThreshold;
             ArticleFetchThreshold = articleFetchThreshold;
 
@@ -32,7 +32,7 @@ namespace PortalScrape.Processing
             }
         }
 
-        public int PeriodInMinutes { get; private set; }
+        public int PeriodInHours { get; private set; }
         public int CommentsUpdateThreshold { get; private set; }
         public int ArticleFetchThreshold { get; private set; }
         public List<Section> Sections { get; private set; }
@@ -40,7 +40,7 @@ namespace PortalScrape.Processing
         public static ProcessConfiguration FromAppConfig()
         {
             return new ProcessConfiguration(
-                Convert.ToInt32(ConfigurationManager.AppSettings["PeriodInMinutes"]),
+                Convert.ToInt32(ConfigurationManager.AppSettings["PeriodInHours"]),
                 Convert.ToInt32(ConfigurationManager.AppSettings["CommentsUpdateThreshold"]),
                 Convert.ToInt32(ConfigurationManager.AppSettings["ArticleFetchThreshold"]),
                 Scope.AllSections);

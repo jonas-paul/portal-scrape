@@ -2,6 +2,7 @@
 
 namespace PortalScrape.DataAccess.Entities
 {
+    [Serializable]
     public class ArticleInfo
     {
         public virtual Portal Portal { get; set; }

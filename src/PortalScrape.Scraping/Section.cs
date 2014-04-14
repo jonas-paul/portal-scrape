@@ -1,7 +1,9 @@
-﻿using PortalScrape.DataAccess.Entities;
+﻿using System;
+using PortalScrape.DataAccess.Entities;
 
 namespace PortalScrape.Scraping
 {
+    [Serializable]
     public class Section
     {
         public Section(Portal portal, string host, string relativeUrl, string description)

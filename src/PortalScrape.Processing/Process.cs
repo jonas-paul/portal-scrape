@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using log4net;
 using NHibernate.Linq;
@@ -16,6 +15,11 @@ namespace PortalScrape.Processing
 
         public void Run(ProcessConfiguration cfg)
         {
+            if (cfg == null)
+            {
+                cfg = ProcessConfiguration.FromAppConfig();
+            }
+
             _metrics = new ProcessMetrics();
             _metrics.NotifyProcessStarted();
 
@@ -33,7 +37,7 @@ namespace PortalScrape.Processing
                 foreach (var section in cfg.Sections)
                 {
                     _log.DebugFormat("Scraping section {0} in portal {1}...", section.Description, section.Portal);
-                    var scrapedInfos = scrape.ArticleInfos(section, TimeSpan.FromMinutes(cfg.PeriodInMinutes)).Distinct().ToList();
+                    var scrapedInfos = scrape.ArticleInfos(section, TimeSpan.FromHours(cfg.PeriodInHours)).Distinct().ToList();
                     _log.DebugFormat("{0} articles found.", scrapedInfos.Count);
 
                     foreach (var scrapedInfo in scrapedInfos)
@@ -67,9 +71,9 @@ namespace PortalScrape.Processing
                             session.Save(scrapedInfo);
                         }
                     }
-                }
 
-                session.Flush();
+                    session.Flush();
+                }
 
                 _metrics.ArticleOrders = articleOrders.Count;
                 _metrics.CommentsOrders = commentsOrders.Count;
