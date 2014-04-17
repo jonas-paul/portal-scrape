@@ -58,7 +58,7 @@ namespace PortalScrape.Processing
             try
             {
                 return _articleScrapers
-                    .First(s => s.Portal == articleInfo.Portal)
+                    .First(s => s.Portal == articleInfo.Id.Portal)
                     .Scrape(articleInfo);
             }
             catch (Exception e)
@@ -75,7 +75,7 @@ namespace PortalScrape.Processing
             try
             {
                 return _commentScrapers
-                    .First(s => s.Portal == articleInfo.Portal)
+                    .First(s => s.Portal == articleInfo.Id.Portal)
                     .ScrapeRange(articleInfo, from, to);
             }
             catch (Exception e)

@@ -30,17 +30,19 @@ namespace PortalScrape.Scraping.PenkMin
                 var commentsFromJson = JsonConvert.DeserializeObject<List<CommentFromJson>>(json);
 
                 comments.AddRange(commentsFromJson.Select(c =>
-                    new Comment
+                {
+                    var comment = new Comment
                     {
-                        ArticleId = articleInfo.Id,
+                        ArticleId = articleInfo.Id.ExternalId,
                         CommentText = c.content,
                         DateCreated = ParseRelativeDate(c.date),
                         DateScraped = DateTime.UtcNow.AddHours(2),
                         IpAddress = c.ip,
-                        Portal = Portal.PenkMin,
-                        Id = c.id,
                         UserName = c.name,
-                    }));
+                        Id = {ExternalId = c.id, Portal = Portal.PenkMin},
+                    };
+                    return comment;
+                }));
             }
 
             return comments.Take(to - from + 1).ToList();

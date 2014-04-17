@@ -34,7 +34,7 @@ namespace PortalScrape.Tests.Integration
             {
                 Url =
                     "http://www.delfi.lt/news/daily/education/dalis-sostines-priesmokyklinuku-isikurs-kitur.d?id=64297936",
-                Id = "64297936"
+                Id = { ExternalId = "64297936"}
             };
             var scraper = new DelfiCommentsScraper();
             var comments = scraper.ScrapeRange(ai, 1, 5);

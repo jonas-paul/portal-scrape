@@ -5,8 +5,12 @@ namespace PortalScrape.DataAccess.Entities
     [Serializable]
     public class ArticleInfo
     {
-        public virtual Portal Portal { get; set; }
-        public virtual string Id { get; set; }
+        public ArticleInfo()
+        {
+            Id = new EntityId();
+        }
+
+        public virtual EntityId Id { get; set; }
         public virtual DateTime DateScraped { get; set; }
 
         public virtual string Url { get; set; }
@@ -22,14 +26,14 @@ namespace PortalScrape.DataAccess.Entities
             var comment = obj as ArticleInfo;
             if (comment == null) return false;
 
-            return comment.Portal == Portal && comment.Id == Id;
+            return comment.Id == Id;
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return Id.GetHashCode() * 23 + Portal.GetHashCode();
+                return Id.GetHashCode();
             }
         }
     }

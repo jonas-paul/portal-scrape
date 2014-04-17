@@ -27,7 +27,7 @@ namespace PortalScrape.Tests.Integration
         public void Commments()
         {
             var scr = new LrytasCommentsScraper();
-            var comments = scr.ScrapeRange(new ArticleInfo { Id = "13960425731395759508" }, 270, 500);
+            var comments = scr.ScrapeRange(new ArticleInfo { Id = {ExternalId = "13960425731395759508" } }, 270, 500);
         }
     }
 }

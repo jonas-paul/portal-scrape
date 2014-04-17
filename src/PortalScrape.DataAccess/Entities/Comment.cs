@@ -4,8 +4,7 @@ namespace PortalScrape.DataAccess.Entities
 {
     public class Comment
     {
-        public virtual Portal Portal { get; set; }
-        public virtual string Id { get; set; }
+        public virtual EntityId Id { get; set; }
         public virtual DateTime DateScraped { get; set; }
         
         public virtual string ArticleId { get; set; }
@@ -23,14 +22,14 @@ namespace PortalScrape.DataAccess.Entities
             var comment = obj as Comment;
             if (comment == null) return false;
 
-            return comment.Portal == Portal && comment.Id == Id && comment.ArticleId == ArticleId;
+            return comment.Id == Id;
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return (Id.GetHashCode() * 23 + Portal.GetHashCode()) * 23 + ArticleId.GetHashCode();
+                return Id.GetHashCode();
             }
         }
     }

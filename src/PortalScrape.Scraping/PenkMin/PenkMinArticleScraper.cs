@@ -17,7 +17,6 @@ namespace PortalScrape.Scraping.PenkMin
 
             return new Article
             {
-                Portal = articleInfo.Portal,
                 Id = articleInfo.Id,
                 CommentCount = articleInfo.CommentCount,
                 Title = articleInfo.Title,

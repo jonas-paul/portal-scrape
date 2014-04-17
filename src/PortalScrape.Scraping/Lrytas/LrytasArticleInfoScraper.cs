@@ -73,11 +73,11 @@ namespace PortalScrape.Scraping.Lrytas
 
             var articleInfo = new ArticleInfo();
             articleInfo.Url = new Uri (new Uri(Lrytas.MainHost), linkToArticle.Attributes["href"].Value).ToString();
-            articleInfo.Id = commentCountNode.Attributes["href"].Value.GetSubstringBetween("=", "&");
+            articleInfo.Id.ExternalId = commentCountNode.Attributes["href"].Value.GetSubstringBetween("=", "&");
             articleInfo.Title = articleDiv.SelectSingleNode("h2/a").InnerText;
             articleInfo.DatePublished = DateTime.ParseExact(dateDiv.InnerText, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);
-            articleInfo.Portal = Portal.Lrytas;
+            articleInfo.Id.Portal = Portal.Lrytas;
             articleInfo.CommentCount = Convert.ToInt32(commentCountNode.InnerText);
 
             return articleInfo;

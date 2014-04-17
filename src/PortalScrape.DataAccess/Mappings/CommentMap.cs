@@ -9,10 +9,9 @@ namespace PortalScrape.DataAccess.Mappings
         {
             Table("Comments");
 
-            CompositeId()
+            CompositeId(x => x.Id)
                 .KeyProperty(x => x.Portal)
-                .KeyProperty(x => x.Id)
-                .KeyProperty(x => x.ArticleId);
+                .KeyProperty(x => x.ExternalId);
             Map(x => x.DateScraped).Not.Nullable();
 
             Map(x => x.IpAddress).Not.Nullable();

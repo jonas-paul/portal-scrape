@@ -25,7 +25,7 @@ namespace PortalScrape.Scraping.Delfi
 
                 var docNode = Utilities.DownloadPage(url);
                 var commentNodes = docNode.SelectNodes("//ul[@id='comments-list']/li");
-                comments.AddRange(commentNodes.Select(cn => ParseComment(cn, articleInfo.Id)));
+                comments.AddRange(commentNodes.Select(cn => ParseComment(cn, articleInfo.Id.ExternalId)));
             }
 
             return comments.Take(to - from + 1).ToList();
@@ -51,8 +51,8 @@ namespace PortalScrape.Scraping.Delfi
             comment.DateScraped = DateTime.UtcNow.AddHours(2);
             comment.DownVotes = Convert.ToInt32(votesParts[2]);
             comment.IpAddress = ipString;
-            comment.Portal = Portal.Delfi;
-            comment.Id = commentAnchor.Substring(1).Trim();
+            comment.Id.Portal = Portal.Delfi;
+            comment.Id.ExternalId = commentAnchor.Substring(1).Trim();
             comment.Upvotes = Convert.ToInt32(votesParts[1]);
             comment.UserName = authorNode.SelectSingleNode("h3").InnerText.Trim();
 

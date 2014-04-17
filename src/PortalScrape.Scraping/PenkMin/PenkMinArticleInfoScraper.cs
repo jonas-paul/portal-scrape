@@ -57,11 +57,11 @@ namespace PortalScrape.Scraping.PenkMin
 
             var articleInfo = new ArticleInfo();
             articleInfo.Title = titleDiv.SelectSingleNode("h3/span/a").InnerText;
-            articleInfo.Url = titleDiv.SelectSingleNode("h3/span/a").Attributes["href"].Value;
+            articleInfo.Url = PenkMin.MainHost + titleDiv.SelectSingleNode("h3/span/a").Attributes["href"].Value;
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);
             articleInfo.CommentCount = commentCount;
-            articleInfo.Portal = Portal.PenkMin;
-            articleInfo.Id = articleInfo.Url.Split(new[] {'?'}, StringSplitOptions.None)[0].Split(new[] {"-"},
+            articleInfo.Id.Portal = Portal.PenkMin;
+            articleInfo.Id.ExternalId = articleInfo.Url.Split(new[] {'?'}, StringSplitOptions.None)[0].Split(new[] {"-"},
                         StringSplitOptions.None).Last().Trim();
 
             return articleInfo;

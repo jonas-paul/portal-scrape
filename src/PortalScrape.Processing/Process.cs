@@ -59,6 +59,9 @@ namespace PortalScrape.Processing
                             }
 
                             session.Merge(scrapedInfo);
+
+                            currentInfos.Remove(currentInfo);
+                            currentInfos.Add(scrapedInfo);
                         }
                         else
                         {
@@ -69,6 +72,7 @@ namespace PortalScrape.Processing
                             }
 
                             session.Save(scrapedInfo);
+                            currentInfos.Add(scrapedInfo);
                         }
                     }
 
@@ -83,7 +87,7 @@ namespace PortalScrape.Processing
 
                 foreach (var articleOrder in articleOrders)
                 {
-                    _log.DebugFormat("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Portal);
+                    _log.DebugFormat("Scraping article '{0}' in portal {1}...", articleOrder.Title, articleOrder.Id.Portal);
                     var article = scrape.Article(articleOrder);
                     if (article == null) continue;
                     session.SaveOrUpdate(article);
@@ -96,7 +100,7 @@ namespace PortalScrape.Processing
 
                 foreach (var commentsOrder in commentsOrders)
                 {
-                    _log.DebugFormat("Scraping comments for article '{0}' in portal {1}...", commentsOrder.Title, commentsOrder.Portal);
+                    _log.DebugFormat("Scraping comments for article '{0}' in portal {1}...", commentsOrder.Title, commentsOrder.Id.Portal);
                     var comments = scrape.Comments(commentsOrder, commentsOrder.CommentCountInDb, commentsOrder.CommentCount).Distinct().ToList();
                     comments.ForEach(session.SaveOrUpdate);
 

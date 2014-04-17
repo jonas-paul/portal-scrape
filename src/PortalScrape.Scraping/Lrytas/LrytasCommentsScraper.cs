@@ -43,7 +43,7 @@ namespace PortalScrape.Scraping.Lrytas
                 }
 
                 var commentNodes = docNode.SelectNodes(".//div[@class='comment']");
-                var scrapedComments = commentNodes.Select(cn => ParseComment(cn, articleInfo.Id)).ToList();
+                var scrapedComments = commentNodes.Select(cn => ParseComment(cn, articleInfo.Id.ExternalId)).ToList();
 
                 comments.AddRange(scrapedComments);
                 page++;
@@ -62,11 +62,11 @@ namespace PortalScrape.Scraping.Lrytas
                 DateTime.ParseExact(commentNode.SelectSingleNode(".//div[@class='comment-time']").InnerText,
                     "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             comment.DateScraped = DateTime.UtcNow.AddHours(2);
-            comment.Id = commentNode.SelectSingleNode(".//div[@class='comment-vert1']/a").Attributes["href"].Value
+            comment.Id.ExternalId = commentNode.SelectSingleNode(".//div[@class='comment-vert1']/a").Attributes["href"].Value
                 .GetSubstringBetween("comr(", ",'");
             comment.IpAddress = commentNode.SelectSingleNode(".//div[@class='comment-ip']").InnerText
                 .Replace("IP:", "").Trim();
-            comment.Portal = Portal.Lrytas;
+            comment.Id.Portal = Portal.Lrytas;
             var commentTitle = commentNode.SelectSingleNode(".//div[@class='comment-nr']").InnerText;
             comment.UserName = HttpUtility.HtmlDecode(commentTitle.Substring(commentTitle.IndexOf('.') + 1).Trim());
 

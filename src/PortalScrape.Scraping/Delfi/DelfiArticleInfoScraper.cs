@@ -75,11 +75,11 @@ namespace PortalScrape.Scraping.Delfi
                 throw new Exception("Delfi TV article");
             }
 
-            articleInfo.Id = articleInfo.Url.GetQueryParameterValueFromUrl("id");
+            articleInfo.Id.ExternalId = articleInfo.Url.GetQueryParameterValueFromUrl("id");
             articleInfo.Title = linkToArticle.InnerText;
             articleInfo.DatePublished = DelfiWordyDateParser.Parse(dateDiv.InnerText);
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);
-            articleInfo.Portal = Portal.Delfi;
+            articleInfo.Id.Portal = Portal.Delfi;
             articleInfo.CommentCount = commentCountNode == null ? 0 : Convert.ToInt32(commentCountNode.InnerText.TrimStart('(').TrimEnd(')'));
 
             var articleId = Convert.ToInt32(articleInfo.Url.GetQueryParameterValueFromUrl("id"));

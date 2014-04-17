@@ -16,7 +16,6 @@ namespace PortalScrape.Scraping.Lrytas
 
             return new Article
             {
-                Portal = Portal.Lrytas,
                 Id = articleInfo.Id,
                 CommentCount = articleInfo.CommentCount,
                 Title = articleInfo.Title,
