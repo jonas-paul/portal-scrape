@@ -35,6 +35,9 @@ namespace PortalScrape.Scraping.PenkMin
                 {
                     result.Add(ParseArticleInfoDiv(articleDiv));
                 }
+                catch (CommonParsingException e)
+                {
+                }
                 catch (Exception e)
                 {
                     e.Data["articleDiv"] = articleDiv.OuterHtml;
@@ -42,7 +45,7 @@ namespace PortalScrape.Scraping.PenkMin
                 }
             }
 
-            return result;
+            return result.Where(a => !a.Url.Contains("gallery") && !a.Url.Contains("/receptas/") && !a.Url.Contains("galerija")).ToList();
         }
 
         private static ArticleInfo ParseArticleInfoDiv(HtmlNode articleDiv)

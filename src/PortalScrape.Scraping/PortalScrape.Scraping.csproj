@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonParsingException.cs" />
     <Compile Include="IArticleScraper.cs" />
     <Compile Include="IArticleInfoScraper.cs" />
     <Compile Include="ICommentsScraper.cs" />
@@ -54,7 +55,7 @@
     <Compile Include="Lrytas\LrytasArticleScraper.cs" />
     <Compile Include="Lrytas\LrytasCommentsScraper.cs" />
     <Compile Include="PenkMin\PenkMin.cs" />
-    <Compile Include="DelfiWordyDateParser.cs" />
+    <Compile Include="Delfi\DelfiWordyDateParser.cs" />
     <Compile Include="Delfi\Delfi.cs" />
     <Compile Include="Delfi\DelfiCommentsScraper.cs" />
     <Compile Include="Delfi\DelfiArticleInfoScraper.cs" />

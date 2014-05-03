@@ -51,6 +51,9 @@ namespace PortalScrape.Scraping.Delfi
                 {
                     result.Add(ParseArticleInfoDiv(articleDiv));
                 }
+                catch (CommonParsingException e)
+                {
+                }
                 catch (Exception e)
                 {
                     e.Data["articleDiv"] = articleDiv.OuterHtml;
@@ -72,7 +75,7 @@ namespace PortalScrape.Scraping.Delfi
             articleInfo.Url = linkToArticle.Attributes["href"].Value;
             if (articleInfo.Url.Contains(@"/video/"))
             {
-                throw new Exception("Delfi TV article");
+                throw new CommonParsingException("Delfi TV article");
             }
 
             articleInfo.Id.ExternalId = articleInfo.Url.GetQueryParameterValueFromUrl("id");
@@ -83,7 +86,7 @@ namespace PortalScrape.Scraping.Delfi
             articleInfo.CommentCount = commentCountNode == null ? 0 : Convert.ToInt32(commentCountNode.InnerText.TrimStart('(').TrimEnd(')'));
 
             var articleId = Convert.ToInt32(articleInfo.Url.GetQueryParameterValueFromUrl("id"));
-            if (articleId == 0) throw new Exception("Article id not found");
+            if (articleId == 0) throw new CommonParsingException("Article id not found");
 
             return articleInfo;
         }

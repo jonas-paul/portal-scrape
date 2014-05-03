@@ -51,6 +51,9 @@ namespace PortalScrape.Scraping.Lrytas
                 {
                     result.Add(ParseArticleInfoDiv(articleDiv));
                 }
+                catch (CommonParsingException e)
+                {
+                }
                 catch (Exception e)
                 {
                     e.Data["articleDiv"] = articleDiv.OuterHtml;
@@ -68,7 +71,7 @@ namespace PortalScrape.Scraping.Lrytas
             var commentCountNode = articleDiv.SelectSingleNode(".//a[@class='k']");
             if (commentCountNode == null)
             {
-                throw new Exception("Article id not found");
+                throw new CommonParsingException("Article id not found");
             }
 
             var articleInfo = new ArticleInfo();

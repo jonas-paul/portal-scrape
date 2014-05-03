@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PortalScrape.Scraping
+namespace PortalScrape.Scraping.Delfi
 {
     public static class DelfiWordyDateParser
     {
@@ -17,7 +15,7 @@ namespace PortalScrape.Scraping
             {"gegužės", 5},
             {"birželio", 6},
             {"liepos", 7},
-            {"rupjūčio", 8},
+            {"rugpjūčio", 8},
             {"rugsėjo", 9},
             {"spalio", 10},
             {"lapkričio", 11},
@@ -28,6 +26,19 @@ namespace PortalScrape.Scraping
         private const string LithuanianDayToken= "d.";
 
         public static DateTime Parse(string dateString)
+        {
+            try
+            {
+                return Parsef(dateString);
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
+        }
+
+        public static DateTime Parsef(string dateString)
         {
             dateString = dateString.Trim();
 

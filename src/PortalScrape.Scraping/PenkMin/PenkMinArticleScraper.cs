@@ -31,7 +31,8 @@ namespace PortalScrape.Scraping.PenkMin
 
         private string GetBody(HtmlNode docNode)
         {
-            var intro = docNode.SelectSingleNode("//div[@class='intro']").InnerText.Trim();
+            var introNode = docNode.SelectSingleNode("//div[@class='intro']");
+            var intro = introNode != null ? introNode.InnerText.Trim() : "";
             var paragraphNodes = docNode.SelectNodes("//div[@itemprop='articleBody']/p");
             var paragraphs = new List<string>();
             if (paragraphNodes != null)
@@ -61,11 +62,11 @@ namespace PortalScrape.Scraping.PenkMin
             return node.Attributes["content"].Value.ParseDateTime();
         }
 
-        private DateTime GetDateModified(HtmlNode docNode)
+        private DateTime? GetDateModified(HtmlNode docNode)
         {
             // meta itemprop="dateModified" content="
             var node = docNode.SelectSingleNode("//meta[@itemprop='dateModified']");
-            return node.Attributes["content"].Value.ParseDateTime();
+            return node != null ? node.Attributes["content"].Value.ParseDateTime() : (DateTime?)null;
         }
     }
 }
