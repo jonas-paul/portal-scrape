@@ -22,18 +22,15 @@ namespace PortalScrape.DataAccess.Entities
 
         public override bool Equals(object obj)
         {
-            var comment = obj as Article;
-            if (comment == null) return false;
+            var article = obj as Article;
+            if (article == null) return false;
 
-            return comment.Id == Id;
+            return article.Id.Equals(Id);
         }
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return Id.GetHashCode();
-            }
+            return Id.GetHashCode();
         }
     }
 }

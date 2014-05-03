@@ -32,7 +32,7 @@ namespace PortalScrape.Processing
 
             using (var session = NHibernateHelper.OpenSession())
             {
-                var currentInfos = session.Query<ArticleInfo>().ToList();
+                //var currentInfos = session.Query<ArticleInfo>().ToList();
 
                 foreach (var section in cfg.Sections)
                 {
@@ -42,7 +42,7 @@ namespace PortalScrape.Processing
 
                     foreach (var scrapedInfo in scrapedInfos)
                     {
-                        var currentInfo = currentInfos.FirstOrDefault(ci => ci.Equals(scrapedInfo));
+                        var currentInfo = session.Get<ArticleInfo>(scrapedInfo.Id);
 
                         if (currentInfo != null)
                         {
@@ -60,8 +60,8 @@ namespace PortalScrape.Processing
 
                             session.Merge(scrapedInfo);
 
-                            currentInfos.Remove(currentInfo);
-                            currentInfos.Add(scrapedInfo);
+                            //currentInfos.Remove(currentInfo);
+                            //currentInfos.Add(scrapedInfo);
                         }
                         else
                         {
@@ -72,12 +72,14 @@ namespace PortalScrape.Processing
                             }
 
                             session.Save(scrapedInfo);
-                            currentInfos.Add(scrapedInfo);
+                            //currentInfos.Add(scrapedInfo);
                         }
                     }
 
                     session.Flush();
                 }
+
+
 
                 _metrics.ArticleOrders = articleOrders.Count;
                 _metrics.CommentsOrders = commentsOrders.Count;

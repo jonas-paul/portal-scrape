@@ -19,8 +19,8 @@ namespace PortalScrape.DataAccess.Mappings
             Map(x => x.DatePublished);
             Map(x => x.Title).Not.Nullable();
 
-            Map(x => x.CommentCountInDb).Formula("(SELECT COUNT(*) FROM Comments WHERE Comments.ArticleId = Id)");
-            Map(x => x.HasArticleInDb).Formula("(SELECT 1 FROM Articles WHERE Articles.Id = Id)");
+            Map(x => x.CommentCountInDb).Formula("(SELECT COUNT(*) FROM Comments WHERE Comments.Portal = Portal AND Comments.ExternalId = ExternalId)");
+            Map(x => x.HasArticleInDb).Formula("(SELECT 1 FROM Articles WHERE Articles.Portal = Portal AND Articles.ExternalId = ExternalId)");
         }
     }
 }

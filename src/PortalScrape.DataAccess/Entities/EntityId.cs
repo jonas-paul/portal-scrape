@@ -15,7 +15,10 @@
 
         public override int GetHashCode()
         {
-            return Portal.GetHashCode()*23 + ExternalId.GetHashCode();
+            unchecked
+            {
+                return Portal.GetHashCode() * 23 + ExternalId.GetHashCode();
+            }
         }
     }
 }

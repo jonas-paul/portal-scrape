@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityIdTests.cs" />
     <Compile Include="LrytasScraping.cs" />
     <Compile Include="PenkMinScraping.cs" />
     <Compile Include="ProcessingTests.cs" />
