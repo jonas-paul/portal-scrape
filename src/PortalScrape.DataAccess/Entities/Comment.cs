@@ -4,6 +4,11 @@ namespace PortalScrape.DataAccess.Entities
 {
     public class Comment
     {
+        public Comment()
+        {
+            Id = new EntityId();
+        }
+
         public virtual EntityId Id { get; set; }
         public virtual DateTime DateScraped { get; set; }
         

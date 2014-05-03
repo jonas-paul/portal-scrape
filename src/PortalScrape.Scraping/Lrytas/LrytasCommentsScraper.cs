@@ -22,7 +22,7 @@ namespace PortalScrape.Scraping.Lrytas
             while(page <= pagesToScrape)
             {
                 var url = Lrytas.MainHost;
-                url = url.AddQueryParameterToUrl("id", articleInfo.Id);
+                url = url.AddQueryParameterToUrl("id", articleInfo.Id.ExternalId);
                 url = url.AddQueryParameterToUrl("view", 6);
                 url = url.AddQueryParameterToUrl("p", page);
 

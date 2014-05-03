@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using log4net;
-using NHibernate.Linq;
 using PortalScrape.DataAccess;
 using PortalScrape.DataAccess.Entities;
 
@@ -32,8 +31,6 @@ namespace PortalScrape.Processing
 
             using (var session = NHibernateHelper.OpenSession())
             {
-                //var currentInfos = session.Query<ArticleInfo>().ToList();
-
                 foreach (var section in cfg.Sections)
                 {
                     _log.DebugFormat("Scraping section {0} in portal {1}...", section.Description, section.Portal);
@@ -59,9 +56,6 @@ namespace PortalScrape.Processing
                             }
 
                             session.Merge(scrapedInfo);
-
-                            //currentInfos.Remove(currentInfo);
-                            //currentInfos.Add(scrapedInfo);
                         }
                         else
                         {
@@ -72,14 +66,14 @@ namespace PortalScrape.Processing
                             }
 
                             session.Save(scrapedInfo);
-                            //currentInfos.Add(scrapedInfo);
                         }
                     }
 
                     session.Flush();
                 }
 
-
+                articleOrders = articleOrders.Distinct().ToList();
+                commentsOrders = commentsOrders.Distinct().ToList();
 
                 _metrics.ArticleOrders = articleOrders.Count;
                 _metrics.CommentsOrders = commentsOrders.Count;
