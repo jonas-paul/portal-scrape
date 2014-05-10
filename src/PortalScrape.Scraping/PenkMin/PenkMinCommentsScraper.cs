@@ -33,7 +33,7 @@ namespace PortalScrape.Scraping.PenkMin
                 {
                     var comment = new Comment
                     {
-                        ArticleId = articleInfo.Id.ExternalId,
+                        ArticleExternalId = articleInfo.Id.ExternalId,
                         CommentText = c.content,
                         DateCreated = ParseRelativeDate(c.date),
                         DateScraped = DateTime.UtcNow.AddHours(2),

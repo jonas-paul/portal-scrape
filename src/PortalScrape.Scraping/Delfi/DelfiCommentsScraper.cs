@@ -45,7 +45,7 @@ namespace PortalScrape.Scraping.Delfi
             var votesParts = votesString.Split(new [] {":"}, StringSplitOptions.None);
 
             var comment = new Comment();
-            comment.ArticleId = articleId;
+            comment.ArticleExternalId = articleId;
             comment.CommentText = commentNode.SelectSingleNode("div[contains(@class, 'comment-body')]").InnerText.Trim();
             comment.DateCreated = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             comment.DateScraped = DateTime.UtcNow.AddHours(2);

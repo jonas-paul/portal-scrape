@@ -56,7 +56,7 @@ namespace PortalScrape.Scraping.Lrytas
         {
             var comment = new Comment();
 
-            comment.ArticleId = id;
+            comment.ArticleExternalId = id;
             comment.CommentText = HttpUtility.HtmlDecode(commentNode.SelectSingleNode("p").InnerText.Trim());
             comment.DateCreated =
                 DateTime.ParseExact(commentNode.SelectSingleNode(".//div[@class='comment-time']").InnerText,
