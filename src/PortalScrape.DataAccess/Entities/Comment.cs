@@ -12,7 +12,7 @@ namespace PortalScrape.DataAccess.Entities
         public virtual EntityId Id { get; set; }
         public virtual DateTime DateScraped { get; set; }
         
-        public virtual string ArticleId { get; set; }
+        public virtual string ArticleExternalId { get; set; }
         public virtual DateTime DateCreated { get; set; }
         public virtual string IpAddress { get; set; }
 

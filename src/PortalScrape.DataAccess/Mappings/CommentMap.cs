@@ -12,6 +12,7 @@ namespace PortalScrape.DataAccess.Mappings
             CompositeId(x => x.Id)
                 .KeyProperty(x => x.Portal)
                 .KeyProperty(x => x.ExternalId);
+            Map(x => x.ArticleExternalId).Not.Nullable();
             Map(x => x.DateScraped).Not.Nullable();
 
             Map(x => x.IpAddress).Not.Nullable();
