@@ -26,7 +26,7 @@ namespace PortalScrape.Host
                 {
                     _log.Error(e);
                 }
-            }, null, TimeSpan.FromSeconds(0), TimeSpan.FromMinutes(30));
+            }, null, TimeSpan.FromSeconds(0), TimeSpan.FromMinutes(60));
         }
 
         public void Stop()
