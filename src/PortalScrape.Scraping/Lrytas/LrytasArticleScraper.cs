@@ -25,6 +25,7 @@ namespace PortalScrape.Scraping.Lrytas
                 Body = GetBody(docNode),
                 DateModified = GetDateModified(docNode),
                 DatePublished = GetDatePublished(docNode),
+                Keywords = GetKeywords(docNode)
             };
         }
 
@@ -81,6 +82,12 @@ namespace PortalScrape.Scraping.Lrytas
             }
 
             return DateTime.ParseExact(parts[1], "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+        }
+        
+        private string GetKeywords(HtmlNode docNode)
+        {
+            var node = docNode.SelectSingleNode("//meta[@name='keywords']");
+            return node != null ? node.Attributes["content"].Value : null;
         }
     }
 }

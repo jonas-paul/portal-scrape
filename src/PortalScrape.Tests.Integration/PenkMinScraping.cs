@@ -23,7 +23,7 @@ namespace PortalScrape.Tests.Integration
         public void Article()
         {
             var scr = new PenkMinArticleScraper();
-            var article = scr.Scrape(new ArticleInfo { Url = "http://www.15min.lt/naujiena/aktualu/pasaulis/kabule-talibano-kovotojai-atakuoja-rinkimu-komisijos-bustine-57-415839?cf=vl" });
+            var article = scr.Scrape(new ArticleInfo { Url = "http://www.15min.lt/naujiena/aktualu/pasaulis/nato-palydovinese-nuotraukose-kaip-rusija-atitrauke-savo-pajegas-nuo-ukrainos-pasienio-57-425608?cf=df" });
         }
 
         [Test]

@@ -14,7 +14,7 @@ namespace PortalScrape.Tests.Integration
         {
             var articleInfo = new ArticleInfo
             {
-                Url = "http://www.delfi.lt/news/daily/lithuania/a-butkevicius-apie-nauja-lietuvos-kariuomenes-ginkluote-tai-yra-slapta.d?id=64317130"
+                Url = "http://www.delfi.lt/news/daily/crime/siuolaikines-vergoves-mastai-kelia-siauba.d?id=64756213"
             };
 
             var article = new DelfiArticleScraper().Scrape(articleInfo);

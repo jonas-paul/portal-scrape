@@ -76,7 +76,7 @@ namespace PortalScrape.Scraping.Delfi
 
             if (script == null) return null;
 
-            var keywordString = script.InnerText.GetSubstringBetween("__aokwd=[", "].");
+            var keywordString = script.InnerText.GetSubstringBetween("__aokwd=[", "]");
 
             return keywordString;
         }
@@ -85,7 +85,7 @@ namespace PortalScrape.Scraping.Delfi
         {
             var nodeText = docNode.SelectSingleNode("//body/script[2]").InnerText;
             var startIndex = nodeText.IndexOf("tags=", StringComparison.InvariantCultureIgnoreCase) + 5;
-            var endIndex = nodeText.IndexOf("');", StringComparison.InvariantCultureIgnoreCase);
+            var endIndex = nodeText.IndexOf("'", startIndex, StringComparison.InvariantCultureIgnoreCase);
             var tagString = nodeText.Substring(startIndex, endIndex - startIndex);
 
             return tagString;

@@ -26,6 +26,7 @@ namespace PortalScrape.Scraping.PenkMin
                 Body = GetBody(docNode),
                 DateModified = GetDateModified(docNode),
                 DatePublished = GetDatePublished(docNode),
+                Keywords = GetKeywords(docNode)
             };
         }
 
@@ -67,6 +68,12 @@ namespace PortalScrape.Scraping.PenkMin
             // meta itemprop="dateModified" content="
             var node = docNode.SelectSingleNode("//meta[@itemprop='dateModified']");
             return node != null ? node.Attributes["content"].Value.ParseDateTime() : (DateTime?)null;
+        }
+
+        private string GetKeywords(HtmlNode docNode)
+        {
+            var node = docNode.SelectSingleNode("//meta[@name='keywords']");
+            return node != null ? node.Attributes["content"].Value : null;
         }
     }
 }
