@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
 using log4net;
@@ -15,21 +16,37 @@ namespace PortalScrape.Scraping.PenkMin
 
         public List<ArticleInfo> ScrapeForPeriod(Section section, TimeSpan period)
         {
-            return ScrapeSection(section);
+            var page = 1;
+            var articleInfos = new List<ArticleInfo>();
+            var timeBottomLimit = DateTime.UtcNow.AddHours(2).Add(-period);
+
+            while (true)
+            {
+                var articles = ScrapePage(section, page);
+                var articlesInTimeRange = articles.Where(a => a.DatePublished > timeBottomLimit).ToList();
+                articleInfos.AddRange(articlesInTimeRange);
+
+                if (articles.Count() != articlesInTimeRange.Count() || page > 40) break;
+
+                page++;
+            }
+
+            return articleInfos;
         }
 
-        public List<ArticleInfo> ScrapeSection(Section section)
+        public List<ArticleInfo> ScrapePage(Section section, int page)
         {
             var builder = new UriBuilder(section.Host);
             builder.Path += section.RelativeUrl;
             var url = builder.ToString();
+            url = url.AddQueryParameterToUrl("psl", page);
 
             var docNode = Utilities.DownloadPage(url);
-            var articleDivs = docNode.SelectNodes("//div[@class='article-content']");
+            var articleDivs = docNode.SelectNodes("//div[@class='article-row']");
 
             var result = new List<ArticleInfo>();
 
-            foreach (var articleDiv in articleDivs.Take(100))
+            foreach (var articleDiv in articleDivs)
             {
                 try
                 {
@@ -50,17 +67,19 @@ namespace PortalScrape.Scraping.PenkMin
 
         private static ArticleInfo ParseArticleInfoDiv(HtmlNode articleDiv)
         {
-            var titleDiv = articleDiv.SelectSingleNode("div[@class='vl-article-title']");
-            var commentIcon = titleDiv.SelectSingleNode("p/a/span[@class='comment-icon']");
+            var titleLink = articleDiv.SelectSingleNode(".//h4/a");
+            var dateString = articleDiv.SelectSingleNode(".//em[@class='article-date']").InnerText.Trim();
+            var commentLink = articleDiv.SelectSingleNode(".//p[@class='article-nfo']/a");
             var commentCount = 0;
-            if (commentIcon != null)
+            if (commentLink != null && !String.IsNullOrEmpty(commentLink.InnerText))
             {
-                commentCount = Convert.ToInt32(commentIcon.ParentNode.InnerText.Replace("&nbsp;", "").Trim());
+                commentCount = Convert.ToInt32(commentLink.InnerText.Replace("&nbsp;", "").Trim());
             }
-
+            
             var articleInfo = new ArticleInfo();
-            articleInfo.Title = titleDiv.SelectSingleNode("h3/span/a").InnerText;
-            articleInfo.Url = PenkMin.MainHost + titleDiv.SelectSingleNode("h3/span/a").Attributes["href"].Value;
+            articleInfo.Title = titleLink.InnerText;
+            articleInfo.Url = titleLink.Attributes["href"].Value;
+            articleInfo.DatePublished = DateTime.ParseExact(dateString, "yyyy.MM.dd HH:mm", CultureInfo.InvariantCulture);
             articleInfo.DateScraped = DateTime.UtcNow.AddHours(2);
             articleInfo.CommentCount = commentCount;
             articleInfo.Id.Portal = Portal.PenkMin;
