@@ -69,9 +69,9 @@ namespace PortalScrape.Scraping.PenkMin
         {
             var titleLink = articleDiv.SelectSingleNode(".//h4/a");
             var dateString = articleDiv.SelectSingleNode(".//em[@class='article-date']").InnerText.Trim();
-            var commentLink = articleDiv.SelectSingleNode(".//p[@class='article-nfo']/a");
+            var commentLink = articleDiv.SelectSingleNode(".//a[@class='comment-text']");
             var commentCount = 0;
-            if (commentLink != null && !String.IsNullOrEmpty(commentLink.InnerText))
+            if (commentLink != null)
             {
                 commentCount = Convert.ToInt32(commentLink.InnerText.Replace("&nbsp;", "").Trim());
             }

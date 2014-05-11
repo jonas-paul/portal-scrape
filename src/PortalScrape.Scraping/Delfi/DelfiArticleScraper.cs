@@ -78,12 +78,18 @@ namespace PortalScrape.Scraping.Delfi
 
             var keywordString = script.InnerText.GetSubstringBetween("__aokwd=[", "]");
 
-            return keywordString;
+            var parts = keywordString.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries);
+            var partsWithoutQoutes = parts.Select(p => p.Trim(new[] {'\''}));
+            var keywordsWithoutQoutes = String.Join(",", partsWithoutQoutes);
+
+            return keywordsWithoutQoutes;
         }
 
         private string GetTags(HtmlNode docNode)
         {
-            var nodeText = docNode.SelectSingleNode("//body/script[2]").InnerText;
+            var node = docNode.SelectNodes("//body/script").FirstOrDefault(n => n.InnerText.Contains("tags="));
+            if (node == null) return null;
+            var nodeText = node.InnerText;
             var startIndex = nodeText.IndexOf("tags=", StringComparison.InvariantCultureIgnoreCase) + 5;
             var endIndex = nodeText.IndexOf("'", startIndex, StringComparison.InvariantCultureIgnoreCase);
             var tagString = nodeText.Substring(startIndex, endIndex - startIndex);

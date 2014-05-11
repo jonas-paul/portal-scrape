@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9A13E7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.Host", "PortalScrape.Host\PortalScrape.Host.csproj", "{9C391544-11CE-4776-9421-88D2B1AE7A5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalScrape.SideProcess", "PortalScrape.SideProcess\PortalScrape.SideProcess.csproj", "{380CA1D6-6B3F-4E42-B398-1C6858CB049B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C391544-11CE-4776-9421-88D2B1AE7A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{380CA1D6-6B3F-4E42-B398-1C6858CB049B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380CA1D6-6B3F-4E42-B398-1C6858CB049B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380CA1D6-6B3F-4E42-B398-1C6858CB049B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380CA1D6-6B3F-4E42-B398-1C6858CB049B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
