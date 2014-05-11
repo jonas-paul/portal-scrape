@@ -26,7 +26,8 @@ namespace PortalScrape.Scraping.PenkMin
                 Body = GetBody(docNode),
                 DateModified = GetDateModified(docNode),
                 DatePublished = GetDatePublished(docNode),
-                Keywords = GetKeywords(docNode)
+                Keywords = GetKeywords(docNode),
+                Tags = GetTags(docNode),
             };
         }
 
@@ -74,6 +75,15 @@ namespace PortalScrape.Scraping.PenkMin
         {
             var node = docNode.SelectSingleNode("//meta[@name='keywords']");
             return node != null ? node.Attributes["content"].Value : null;
+        }
+
+        private string GetTags(HtmlNode docNode)
+        {
+            var node = docNode.SelectSingleNode("//div[contains(@class, 'tags')]");
+            if (node == null) return null;
+
+            var tags = node.SelectNodes("a").Select(n => n.Attributes["title"].Value.Replace(",", "")).ToList();
+            return String.Join(", ", tags);
         }
     }
 }
